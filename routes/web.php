@@ -14,3 +14,14 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+//rutas pacientes
+route::resource('pacientes','PacientesController');
+route::get('pacientes/{id}/destroy',[
+		'uses' =>'PacientesController@destroy',
+		'as' => 'pacientes.destroy'
+]);
+
+//rutas odontologos
+route::resource('odontologos', 'OdontologosController');
+

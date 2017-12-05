@@ -6,7 +6,10 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
-        "laravel/framework": "5.3.*"
+        "acacha/admin-lte-template-laravel": "2.*",
+        "laravel/framework": "5.3.*",
+        "laravelcollective/html": "^5.3.0",
+        "malahierba-lab/chile-rut": " 5.1.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
