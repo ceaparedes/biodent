@@ -35,103 +35,80 @@ public function index(){
     return view('pacientes.create', compact('tipos', $tipos))->with('antecedentes',$antecedentes);
 
   }
-//actionView
-  
-  public function show($id){
 
-    $paciente = Pacientes::findOrFail($id);
-
-    $amg_id =  DB::table('antecedentes_medicos_generales')->where('pac_id', $id)->value('amg_id');
-
-    
-    if ($amg_id != NULL) {
-      $antecedentes = AntecedentesMedicosGenerales::findOrFail($amg_id);
-      
-    }else{
-      $antecedentes = new AntecedentesMedicosGenerales(); 
-    }
-    
-    
-    return view('pacientes.show', compact('paciente','antecedentes'));
-
-
-
-  }
-  //end view
 
   //save()
   public function store(Request $request){
 
     
-     $this->validate($request, [
+      $this->validate($request, [
         'pac_rut_completo' => 'required',
-        'pac_edad'=>'min:1|max:117|numeric',
+        'pac_edad'=>'min:1|max:117|integer',
         'pac_nombres'=>'required|regex:[^[a-zA-Z_áéíóúÁÉÍÓÚñ\s]*$]|min:3|max:100',
         'pac_apellidos'=>'required|regex:[^[a-zA-Z_áéíóúÁÉÍÓÚñ\s]*$]|min:3|max:100',
         'pac_direccion'=>'required|regex:[^[\sa-zA-Z0-9áéíóúAÉÍÓÚÑñ.,#:;-]+$]|min:3|max:200',
-        'pac_telefono'=>'required|numeric|min:111111111|max:99999999999',
+        'pac_telefono'=>'required|integer|min:111111111|max:99999999999',
         'pac_observaciones'=>'required|regex:[^[\sa-zA-Z0-9áéíóúAÉÍÓÚÑñ.,:;-]+$]|min:3|max:200',
         'pac_motivo'=>'required|regex:[^[\sa-zA-Z0-9áéíóúAÉÍÓÚÑñ.,:;-]+$]|min:3|max:200',
         'amg_descripcion'=> 'min:3|max:200|regex:[^[\sa-zA-Z0-9áéíóúAÉÍÓÚÑñ.,:;-]+$]', 
-    ]);
+      ]);
 
     	
-  	$paciente = new Pacientes($request->all());
-    $antecedentes = new AntecedentesMedicosGenerales($request->all());
+  	 $paciente = new Pacientes($request->all());
+     $antecedentes = new AntecedentesMedicosGenerales($request->all());
     
-    $rut_completo = $request->pac_rut_completo;
+     $rut_completo = $request->pac_rut_completo;
     
     
     
-    $apellidos = explode(' ',$request->pac_apellidos);
-    
-
-    if (count($apellidos) == 2) {
-      $paciente->pac_apellido_paterno = $apellidos[0];
-      $paciente->pac_apellido_materno = $apellidos[1];
-
-    }elseif (count($apellidos)>2) {
-      return redirect('pacientes/create')
-                        ->withErrors('Ingrese solamente el apellido paterno y materno en el campo Apellidos')
-                        ->withInput();
-
-    }elseif (count($apellidos) == 1) {
-      $paciente->pac_apellido_paterno = $apellidos[0];
-    }
+     $apellidos = explode(' ',$request->pac_apellidos);
     
 
+      if (count($apellidos) == 2) {
+        $paciente->pac_apellido_paterno = $apellidos[0];
+        $paciente->pac_apellido_materno = $apellidos[1];
 
-    $chilerut = new ChileRut;
-    if ($chilerut->check($rut_completo)) {
+      }elseif (count($apellidos)>2) {
+        return redirect('pacientes/create')
+                          ->withErrors('Ingrese solamente el apellido paterno y materno en el campo Apellidos')
+                          ->withInput();
 
-      $rut = explode('-', $rut_completo);
-      $num_rut = intval(preg_replace('/[^0-9]+/', '', $rut[0]), 10);
-      $paciente->pac_rut = $num_rut;
-      $paciente->pac_dv = $rut[1];
+      }elseif (count($apellidos) == 1) {
+        $paciente->pac_apellido_paterno = $apellidos[0];
+      }
+      
 
 
-    }
-      else{
-         return redirect('pacientes/create')
-                        ->withErrors('El RUT ingresado no es un rut valido')
-                        ->withInput();
+      $chilerut = new ChileRut;
+      if ($chilerut->check($rut_completo)) {
+
+        $rut = explode('-', $rut_completo);
+        $num_rut = intval(preg_replace('/[^0-9]+/', '', $rut[0]), 10);
+        $paciente->pac_rut = $num_rut;
+        $paciente->pac_dv = $rut[1];
+
 
       }
+        else{
+           return redirect('pacientes/create')
+                          ->withErrors('El RUT ingresado no es un rut valido')
+                          ->withInput();
+
+        }
 
   
   
-  $paciente->save();
-  
-  $pac_id =  DB::table('pacientes')->where('pac_rut', $paciente->pac_rut)->value('pac_id');
- 
-  if($antecedentes->amg_descripcion !=null){
+    $paciente->save();
+    
+    $pac_id =  DB::table('pacientes')->where('pac_rut', $paciente->pac_rut)->value('pac_id');
+   
+    if($antecedentes->amg_descripcion !=null){
 
-    $antecedentes->pac_id = $pac_id;
-  	$antecedentes->save();
-
-
-  }
-  return redirect('pacientes')->with('status', 'Paciente creado con exito!');
+      $antecedentes->pac_id = $pac_id;
+    	$antecedentes->save();
+    }
+    
+    return redirect('pacientes')->with('status', '¡Paciente creado con exito!');
 
 
   }
@@ -259,6 +236,24 @@ public function index(){
     return redirect()->route('pacientes.index')->with('destroyStatus', 'Paciente eliminado con exito!');
     
   }//end destory
+
+
+  //actionView
+  
+  public function show($id){
+
+    $paciente = Pacientes::findOrFail($id);
+
+    $amg_id =  DB::table('antecedentes_medicos_generales')->where('pac_id', $id)->value('amg_id');
+  
+    $antecedentes = AntecedentesMedicosGenerales::find($amg_id);
+
+  
+    
+    return view('pacientes.show')->with(['paciente' => $paciente, 'antecedentes' => $antecedentes]);
+
+  }
+  //end view
 
 
 

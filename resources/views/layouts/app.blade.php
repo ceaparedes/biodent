@@ -47,10 +47,10 @@ desired effect
             @yield('main-content')
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
-
+    
     @include('layouts.partials.controlsidebar')
 
-  
+  @include('layouts.partials.footer')
 
 </div><!-- ./wrapper -->
 

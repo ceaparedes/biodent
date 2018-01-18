@@ -36,7 +36,7 @@ class AddOdontologos extends Migration
             $table->integer('odo_id')->unsigned();
             $table->integer('esp_id')->unsigned();
 
-            $table->foreign('odo_id')->references('odo_id')->on('odontologos');
+            $table->foreign('odo_id')->references('odo_id')->on('odontologos')->onDelete('cascade');
             $table->foreign('esp_id')->references('esp_id')->on('especialidades');
             $table->timestamps();
         });

@@ -12,5 +12,16 @@ class AntecedentesMedicosGenerales extends Model
     protected $fillable =['amg_id','pac_id','tan_id','amg_descripcion'];
 
 
+    
+    public function paciente(){
+
+    	return $this->belongsTo('App\Paciente','pac_id');
+    }
+	
+
+	public function tipo_antecedentes(){
+		return $this->belongsTo('App\TiposAntecedentes','tan_id');
+	}
+
 
 }

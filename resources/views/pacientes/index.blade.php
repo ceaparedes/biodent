@@ -21,6 +21,7 @@
 
 <table class="table">
 	<thead>
+		<th>#</th>
 		<th>Rut Paciente</th>
 		<th>DV</th>
 		<th>Nombres Pacientes</th>
@@ -32,6 +33,7 @@
 	<tbody>
 		@foreach($pacientes as $paciente)
 			<tr>
+				<td>{{ $loop->iteration}}</td>
 				<td>{{ $paciente->pac_rut }}</td>
 				<td>{{ $paciente->pac_dv }}</td>
 				<td>{{ $paciente->pac_nombres }}</td>

@@ -15,12 +15,10 @@ class AddAntecedentesMedicosGenerales extends Migration
     {
         Schema::create('antecedentes_medicos_generales', function (Blueprint $table) {
             $table->increments('amg_id');
-            $table->integer('pac_id')->unsigned();
-            $table->integer('tan_id')->unsigned();
-            $table->string('amg_descripcion');
+            $table->string('amg_tipo');
+
 
             $table->foreign('pac_id')->references('pac_id')->on('pacientes')->onDelete('cascade');
-            $table->foreign('tan_id')->references('tan_id')->on('tipos_antecedentes');
             $table->timestamps();
         });
     }

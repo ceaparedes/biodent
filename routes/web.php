@@ -24,4 +24,24 @@ route::get('pacientes/{id}/destroy',[
 
 //rutas odontologos
 route::resource('odontologos', 'OdontologosController');
+route::get('odontologos/{id}/destroy',[
+			'uses'=> 'OdontologosController@destroy',
+			'as' => 'odontologos.destroy'
 
+]);
+
+//Rutas Especialidades
+route::resource('especialidades', 'EspecialidadesController');
+route::get('especialidades/{id}/destroy',[
+			'uses'=> 'EspecialidadesController@destroy',
+			'as' => 'especialidades.destroy'
+
+]);
+
+//rutas Tratamientos
+route::resource('tratamientos', 'TratamientosController');
+route::get('tratamientos/{id}/destroy',[
+			'uses'=> 'tratamientosController@destroy',
+			'as' => 'tratamientos.destroy'
+
+]);

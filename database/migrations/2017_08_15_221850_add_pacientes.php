@@ -24,7 +24,8 @@ class AddPacientes extends Migration
             $table->string('pac_direccion', 200);
             $table->string('pac_telefono', 12);
             $table->string('pac_motivo', 200);
-            $table->string('pac_observaciones', 200);
+            $table->string('pac_anamnesis_descipcion', 250);
+            $table->string('pac_observaciones', 250);
             $table->timestamps();
         });
     }

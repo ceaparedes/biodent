@@ -5,7 +5,7 @@
 
 @section('main-content')
 
-<h2>Ficha Dental</h2>
+<h2>Ficha Dental {{$paciente->pac_nombres}} {{$paciente->pac_apellido_paterno}} {{$paciente->pac_apellido_materno}}</h2>
 
 <table class="table">
 
@@ -38,15 +38,15 @@
 		<td>{{$paciente->pac_motivo}}</td>
 	</tr>
 
-	@if($antecedentes )
-	<tr><h3>Anamnesis</h3></tr>
+	@if($antecedentes != NULL)
 	<tr>
-		<th>Tipo</th>
-		<td>{{$antecedentes->tan_id}}</td>
+		<th>Tipo Antecedente</th>
+		<td>{{$antecedentes->tan_id}} </td>
 	</tr>
+	
 	<tr>
 		<th>Descipcion</th>
-		<td>{{$$antecedentes->amg_descripcion}}</td>
+		<td>{{$antecedentes->amg_descripcion}}</td>
 	</tr>
 	@endif
 
@@ -55,6 +55,7 @@
 		<td>{{$paciente->pac_observaciones}}</td>
 	</tr>
 
+	
 	
 </table>
 

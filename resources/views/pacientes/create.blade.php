@@ -59,7 +59,7 @@
 
       <div class="form-group">
     {!! Form::Label('tipos', 'Tipo:') !!}
-    {!! Form::select('tan_id', $tipos, null, ['class' => 'form-control']) !!}
+    {!! Form::select('tan_id', $tipos, null, ['class' => 'form-control', 'placeholder'=> 'Seleccione Un Tipo']) !!}
     </div>
 
 
