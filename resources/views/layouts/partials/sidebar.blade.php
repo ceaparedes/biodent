@@ -37,7 +37,7 @@
                 <a href="#"><i class="fa fa-file-o" aria-hidden="false"></i> <span>{{ trans('Pacientes') }}</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="{{route('pacientes.create')}}">{{ trans('Crear Nuevo Paciente') }}</a></li>
-                    <li><a href="{{route('pacientes.index')}}">{{ trans('Enlistar Paciente') }}</a></li>
+                    <li><a href="{{route('pacientes.index')}}">{{ trans('Enlistar Pacientes') }}</a></li>
                     <li><a href="#">{{ trans('Crear Plan de Tratamientos')}}</a></li>
                     
                 </ul>
@@ -49,7 +49,6 @@
                     <li><a href="{{route('odontologos.index')}}">{{ trans('Enlistar Odontólogos') }}</a></li>
                     <li><a href="{{route('especialidades.create')}}">{{ trans('Crear Nueva Especialidad')}}</a></li>
                     <li><a href="{{route('especialidades.index')}}">{{ trans('Enlistar Especialidades')}}</a></li>
-                    <li><a href="#">{{ trans('Asignar Especialidad a Odontologo') }}</a></li>
 
                 </ul>
             </li>
@@ -58,6 +57,7 @@
                 <ul class="treeview-menu">
                     <li><a href="{{route('tratamientos.create')}} ">{{ trans('Crear Nuevos Tratamientos') }}</a></li>
                     <li><a href="{{route('tratamientos.index')}} ">{{ trans('Enlistar Tratamientos') }}</a></li>
+                    <li><a href="#">{{ trans('Enlistar Planes de Tratamientos') }}</a></li>
                 </ul>
             </li>
             <li class="treeview">

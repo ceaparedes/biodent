@@ -24,8 +24,13 @@ class AddPacientes extends Migration
             $table->string('pac_direccion', 200);
             $table->string('pac_telefono', 12);
             $table->string('pac_motivo', 200);
-            $table->string('pac_anamnesis_descipcion', 250);
             $table->string('pac_observaciones', 250);
+            $table->timestamps();
+        });
+
+        Schema::create('tipos_antecedentes', function (Blueprint $table) {
+            $table->increments('tan_id');
+            $table->string('tan_tipo', 30);
             $table->timestamps();
         });
     }
@@ -38,5 +43,6 @@ class AddPacientes extends Migration
     public function down()
     {
         Schema::dropIfExists('pacientes');
+        Schema::dropIfExists('tipos_antecedentes');
     }
 }

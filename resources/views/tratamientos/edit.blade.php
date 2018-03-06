@@ -18,7 +18,8 @@
     {!!Form::open(['route'=>['tratamientos.update', $tratamientos->tra_id], 'method' =>'put', 'id'=>'tratamientos_edit' ,'name'=>'tratamientos_edit'])!!}
 
     <h2> Actualizar Tratamiento</h2>
-
+<div class="box box-primary">
+  <div class="box-body">
       <div class="col-lg-6">
         {!!Form::label('tra_nombre', 'Nombres Tratamiento')!!}
         {!!Form::text('tra_nombre', $tratamientos->tra_nombre, ['class'=>'form-control'])!!}
@@ -38,6 +39,8 @@
       <div class="form-horizontal col-lg-7">
         {!!Form::submit('Crear Tratamiento',['class'=>'btn btn-primary'])!!}
       </div>
+    </div>
+</div>
 
 
     {!!Form::close()!!}

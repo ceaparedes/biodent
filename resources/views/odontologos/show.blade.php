@@ -57,7 +57,9 @@
 @if($especialidades != NULL)
 <div class="col-lg-10">
 	<div class ="box box-success">
-		<div class ="box-header"><h2>Especialidades</h2></div>
+		<div class ="box-header">
+			<h2>Especialidades</h2>
+		</div>
 		<div class ="box-body">
 			<table class="table table-bordered">
 			@if(count($especialidades) == 1)

@@ -1,0 +1,51 @@
+<?php
+
+use Illuminate\Database\Seeder;
+
+class add_especialidades extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        DB::table('especialidades')->insert([
+            'esp_nombre' => 'Endodoncista',
+
+        ]);
+
+        DB::table('especialidades')->insert([
+            'esp_nombre' => 'Ortodoncista',
+
+        ]);
+
+        DB::table('especialidades')->insert([
+            'esp_nombre' => 'Rehabilitador Oral',
+
+        ]);
+
+        DB::table('especialidades')->insert([
+            'esp_nombre' => 'Implantologo',
+
+        ]);
+
+         DB::table('especialidades')->insert([
+            'esp_nombre' => 'OdontoPediatra',
+
+        ]);
+
+        DB::table('especialidades')->insert([
+            'esp_nombre' => 'Patologista Máxilo Facial',
+
+        ]);
+
+         DB::table('especialidades')->insert([
+            'esp_nombre' => 'Restaurador Odontológico',
+
+        ]);
+
+
+    }
+}

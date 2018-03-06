@@ -17,7 +17,6 @@ use Malahierba\ChileRut\ChileRut;
 class OdontologosController extends Controller
 {
 
-
     public function index(){
 
       $odontologos = Odontologos::orderBy('odo_id','ASC')->paginate(10); 
@@ -66,7 +65,7 @@ class OdontologosController extends Controller
         $odontologo->odo_apellido_paterno = $apellidos[0];
       }
 
-
+      //validacion rut
       $rut_completo = $request->odo_rut_completo;
        $chilerut = new ChileRut;
       if ($chilerut->check($rut_completo)) {
@@ -86,7 +85,7 @@ class OdontologosController extends Controller
         }
 
         if ($odontologo->odo_password == $request->odo_confirmar_password) {
-          # code...
+              //encriptar contraseña
         }else{
           return redirect('odontologos/create')
                           ->withErrors('Las Contraseñas no Coinciden')
@@ -130,8 +129,6 @@ class OdontologosController extends Controller
         $odontologo = Odontologos::findOrFail($id);
 
         $odontologo->odo_rut_completo = $odontologo->odo_rut . "-". $odontologo->odo_dv;
-
-
 
         if ($odontologo->odo_apellido_materno != NULL) {
           $odontologo->odo_apellidos = $odontologo->odo_apellido_paterno . " " . $odontologo->odo_apellido_materno;
@@ -220,7 +217,7 @@ class OdontologosController extends Controller
 
         }
 
-        //$odontologo->save();
+        $odontologo->save();
         $esp_id_anteriores = DB::table('especialidad_odontologo')->where('odo_id', $id)->pluck('esp_id');
         //si existen especialidades anteriores
         

@@ -68,14 +68,14 @@
 
   <div class = "box box-primary" >
      <div class = "box-header with-border"> 
-      <h3>Especialidad(es) <button id="remove-all" name ="remove-all" class="btn btn-warning pull-right" type="button"><i class="fa fa-minus-circle" aria-hidden="true"></i></button> </h3>
+      <h3>Especialidad(es) <button id="remove-all" name ="remove-all" class="btn btn-warning pull-right" type="button" title ="Eliminar Todas las Especialidades"><i class="fa fa-minus-circle" aria-hidden="true"></i></button> </h3>
      </div>
      <div class = 'box-body' id="especialidades">
       <div class ="col-lg-7">
        {!! Form::Label('especialidades', 'Especialidad:') !!}
        {!! Form::select('esp_id[]', $especialidades, null , ['id' => 'esp_id[]', 'class' => 'form-control ' , 'placeholder' =>'Seleccione Especialidad']) !!}
         </div>
-        <button id="add" name="add" class="btn btn-success pull-right " type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>
+        <button id="add" name="add" class="btn btn-success pull-right " type="button" title= "Añadir nueva especialidad"><i class="fa fa-plus" aria-hidden="true"></i></button>
          
     </div>
   </div>
@@ -133,7 +133,7 @@
       
       var html = '';
       html += '<div class ="col-lg-7"> {!!Form::select('esp_id[]', $especialidades, null, ['id' => 'esp_id[]', 'class' => 'form-control ' , 'placeholder' =>'Seleccione Especialidad'])!!}   </div>';
-      html += '<button id="remove" name="remove" class="btn btn-danger pull-right" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button> '; 
+      html += '<button id="remove" name="remove" class="btn btn-danger pull-right" type="button" title = "Eliminar Especialidad"><i class="fa fa-minus" aria-hidden="true"></i></button> '; 
       
       if (i <= 3) {
         $('#especialidades').append(html);
@@ -159,7 +159,7 @@
       html_all +='<div class ="col-lg-7">';
       html_all +='{!! Form::Label('especialidades', 'Especialidad:') !!}';
       html_all +='{!! Form::select('esp_id[]', $especialidades, null , ['id' => 'esp_id[]', 'class' => 'form-control ' , 'placeholder' =>'Seleccione Especialidad']) !!} </div>';
-      html_all += '<button id="add" name="add" class="btn btn-success pull-right " type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>';
+      html_all += '<button id="add" name="add" class="btn btn-success pull-right " type="button" title= "Añadir nueva especialidad"><i class="fa fa-plus" aria-hidden="true"></i></button>';
 
       $('#especialidades').append(html_all);
 

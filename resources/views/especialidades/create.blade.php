@@ -16,18 +16,22 @@
   @endif
 
   {!!Form::open(['route'=>'especialidades.store', 'method' =>'POST', 'id'=>'especialidades_create' ,'name'=>'especialidades_create'])!!}
-
-  <h2> Crear Nueva Especialidad</h2>
-
-  <div class="col-lg-7">
-    {{form::label('esp_nombre', 'Especialidad')}}
-    {{Form::text('esp_nombre', null, ['class'=>'form-control'])}}
+<div class="box box-primary">
+  <div class="box header">
+    <h2> Crear Nueva Especialidad</h2>
   </div>
-
-  <div class="form-horizontal col-lg-6 ">
-    {{Form::submit('Crear Especialidad',['class'=>'btn btn-success'])}}
+  <div class="box-body">
+    <div class="col-lg-7">
+      {{form::label('esp_nombre', 'Especialidad')}}
+      {{Form::text('esp_nombre', null, ['class'=>'form-control'])}}
+    </div>
   </div>
-{!!Form::close()!!}
-
+  <div class="box-footer">
+    <div class="form-horizontal col-lg-6 ">
+      {{Form::submit('Crear Especialidad',['class'=>'btn btn-success'])}}
+    </div>
+  {!!Form::close()!!}
+  </div>
+</div>
 
 @endsection

@@ -9,15 +9,12 @@ class Pacientes extends Model
     //Información Básica del modelo
     protected $table='pacientes';
     protected $primaryKey = 'pac_id';
-    protected $pac_rut_completo;
-
-   
 
     protected $fillable = ['pac_nombres','pac_apellido_paterno','pac_apellido_materno','pac_edad','pac_direccion','pac_telefono','pac_motivo','pac_observaciones','pac_rut','pac_dv'];
 
     
-	public function antecedentes(){
-		return $this->belongsTo('App\AntecedentesMedicosGenerales','amg_id');
+	public function antecedente(){
+		return $this->belongsToMany('App\AntecedentesMedicosGenerales','pac_id');
 	}
 
 }
