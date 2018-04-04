@@ -22,11 +22,11 @@ route::get('pacientes/{id}/destroy',[
 		'as' => 'pacientes.destroy'
 ]);
 
-//rutas odontologos
-route::resource('odontologos', 'OdontologosController');
-route::get('odontologos/{id}/destroy',[
-			'uses'=> 'OdontologosController@destroy',
-			'as' => 'odontologos.destroy'
+//rutas Usuarios
+route::resource('usuarios', 'UsuariosController');
+route::get('usuarios/{id}/destroy',[
+			'uses'=> 'UsuariosController@destroy',
+			'as' => 'usuarios.destroy'
 
 ]);
 

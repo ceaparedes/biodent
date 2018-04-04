@@ -16,21 +16,25 @@ class AddMateriales extends Migration
         Schema::create('materiales', function (Blueprint $table) {
             $table->increments('mat_id');
             $table->integer('mat_codigo');
+            $table->string('mat_nombre_material');
             $table->integer('mat_costo');
             $table->integer('mat_stock');
-            $table->enum('mat_estado',['Disponible', 'Stock Crítico', 'Sin Stock']);
+            $table->integer('mat_stock_minimo');
+            $table->string('mat_unidad_medida', 50);
+            $table->date('mat_fecha_creacion')->nullable();
+            $table->date('mat_fecha_actualización')->nullable();
+            $table->enum('mat_estado',['Disponible', 'Stock Critico', 'Sin stock']);
             $table->timestamps();
         });
 
-        Schema::create('material_sesion', function (Blueprint $table) {
+        Schema::create('material_sesion', function (Blueprint $table){
             $table->increments('mse_id');
             $table->integer('mat_id')->unsigned();
             $table->integer('set_id')->unsigned();
+            $table->timestamps();
 
             $table->foreign('mat_id')->references('mat_id')->on('materiales');
-            $table->foreign('set_id')->references('set_id')->on('sesiones_ejecucion_tratamientos');
-
-            //$table->timestamps();
+            $table->foreign('set_id')->references('set_id')->on('sesiones_ejecucion_tratamientos')->onDelete('cascade');
         });
     }
 
@@ -42,6 +46,5 @@ class AddMateriales extends Migration
     public function down()
     {
         Schema::dropIfExists('materiales');
-        Schema::dropIfExists('material_sesion');
     }
 }

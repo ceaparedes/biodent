@@ -15,13 +15,13 @@ class AddBoletasServiciosPrestados extends Migration
     {
         Schema::create('boletas_servicios_prestados', function (Blueprint $table) {
             $table->increments('bsp_id');
-            $table->integer('odo_id')->unsigned();
-            $table->integer('bsp_monto_bruto');
-            $table->integer('bsp_monto_liquido');
-          //$table->date('bsp_fecha');
-
-            $table->foreign('odo_id')->references('odo_id')->on('odontologos')->onDelete('cascade');
+            $table->integer('usu_id')->unsigned();
+            $table->integer('bsp_monto_bruto')->nullable();
+            $table->integer('bsp_monto_liquido')->nullable();
+            $table->date('bsp_fecha')->nullable();
             $table->timestamps();
+
+            $table->foreign('usu_id')->references('usu_id')->on('usuarios');
         });
     }
 

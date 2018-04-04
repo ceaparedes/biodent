@@ -15,7 +15,7 @@
       </div> 
   @endif
 
-    {!!Form::open(['route'=>'pacientes.store', 'method' =>'POST', 'id'=>'pacientes_create' ,'name'=>'pacientes_create'])!!}
+{!!Form::open(['route'=>'pacientes.store', 'method' =>'POST', 'id'=>'pacientes_create' ,'name'=>'pacientes_create'])!!}
 <div class="box box-primary">
   <div class="box-header">
     <h2> Ficha Dental</h2>
@@ -42,6 +42,12 @@
       </div> 
 
       <div class="col-lg-6">
+        {!!Form::label('pac_fecha_nacimiento', 'Fecha de Nacimiento')!!}
+        {!!Form::date('pac_fecha_nacimiento', null, ['class'=>'form-control'])!!}
+
+      </div>
+
+      <div class="col-lg-6">
         {!!Form::label('pac_edad', 'Edad')!!}
         {!!Form::number('pac_edad', null, ['class'=>'form-control'])!!}
       </div>
@@ -51,9 +57,19 @@
         {!!Form::text('pac_direccion', null, ['class'=>'form-control'])!!}
       </div>
 
+      <div class="col-lg-6">
+        {!!Form::label('comuna', 'Comuna de Residencia')!!}
+        {!!Form::select('com_id', $comuna, null, ['class' => 'form-control', 'placeholder'=> 'Seleccione Comuna de Residencia', 'id ' => 'com_id'])!!}
+      </div>
+
       <div class=" col-lg-6">
         {!!Form::label('pac_telefono', 'Teléfono')!!}
         {!!Form::text('pac_telefono', null, ['class'=>'form-control'])!!}
+      </div>
+
+      <div class="col-lg-6">
+        {!!Form::label('pac_email', 'Email Usuario')!!}
+        {!!Form::text('pac_email', null, ['class'=>'form-control'])!!}
       </div>
 
       <div class="col-lg-12">

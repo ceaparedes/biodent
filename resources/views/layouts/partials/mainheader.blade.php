@@ -23,7 +23,7 @@
                
                 
                 @if (Auth::guest())
-                    <li><a href="{{ url('/login') }}">{{ trans('adminlte_lang::message.login') }}</a></li>
+                    <li><a href="{{ url('/login') }}">{{ trans('Cerrar Sesion') }}</a></li> <!--modificado para el informe-->
                 @else
                     <!-- User Account Menu -->
                     <li class="dropdown user user-menu">

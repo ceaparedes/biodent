@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class EstadosPlanesDeTratamientos extends Migration
+class AddTiposAntecedentes extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class EstadosPlanesDeTratamientos extends Migration
      */
     public function up()
     {
-        Schema::create('estados_planes_de_tratamientos', function (Blueprint $table) {
-            $table->increments('ept_id');
-            $table->string('ept_estado',50);
+        Schema::create('tipos_antecedentes', function (Blueprint $table) {
+            $table->increments('tan_id');
+            $table->string('tan_tipo', 30);
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class EstadosPlanesDeTratamientos extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('estados_planes_de_tratamientos');
+        Schrema::dropIfExists('tipos_antecedentes');
     }
 }

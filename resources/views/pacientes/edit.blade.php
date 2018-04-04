@@ -42,6 +42,12 @@
       </div> 
 
       <div class="col-lg-6">
+        {!!Form::label('pac_fecha_nacimiento', 'Fecha de Nacimiento')!!}
+        {!!Form::date('pac_fecha_nacimiento', $paciente->pac_fecha_nacimiento, ['class'=>'form-control'])!!}
+
+      </div>
+
+      <div class="col-lg-6">
         {!!Form::label('pac_edad', 'Edad')!!}
         {!!Form::number('pac_edad', $paciente->pac_edad, ['class'=>'form-control'])!!}
       </div>
@@ -51,9 +57,19 @@
         {!!Form::text('pac_direccion', $paciente->pac_direccion, ['class'=>'form-control'])!!}
       </div>
 
+      <div class="col-lg-6">
+        {!!Form::label('comuna', 'Comuna de Residencia')!!}
+        {!!Form::select('com_id', $comuna, $paciente->com_id, ['class' => 'form-control', 'placeholder'=> 'Seleccione Comuna de Residencia', 'id ' => 'com_id'])!!}
+      </div>
+
       <div class=" col-lg-6">
         {!!Form::label('pac_telefono', 'Teléfono')!!}
         {!!Form::text('pac_telefono', $paciente->pac_telefono, ['class'=>'form-control'])!!}
+      </div>
+
+      <div class="col-lg-6">
+        {!!Form::label('pac_email', 'Email Usuario')!!}
+        {!!Form::text('pac_email', $paciente->pac_email, ['class'=>'form-control'])!!}
       </div>
 
       <div class="col-lg-12">
@@ -116,10 +132,8 @@
         </div>
       @endif
      
-      </div>
-
-      
-    </div>
+      </div>    
+</div>
 
 
 <div class="box box-primary">
@@ -134,7 +148,7 @@
     </div>
       <div class ="box-footer with-border">
         <div class="form-horizontal" align="center">
-          {!!Form::submit('Crear Paciente',['class'=>'btn btn-success', 'id' => 'crear'])!!}
+          {!!Form::submit('Actualizar Paciente',['class'=>'btn btn-primary', 'id' => 'crear'])!!}
         </div>
       </div>
 </div>

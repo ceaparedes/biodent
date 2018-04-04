@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddEstadosTratamientos extends Migration
+class AddComuna extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class AddEstadosTratamientos extends Migration
      */
     public function up()
     {
-        Schema::create('estados_tratamientos', function (Blueprint $table) {
-            $table->increments('est_id');
-            $table->string('est_estado',50);
+        Schema::create('comuna', function (Blueprint $table) {
+            $table->increments('com_id');
+            $table->string('com_nombre', 200);
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class AddEstadosTratamientos extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('estados_tratamientos');
+        Schema::dropIfExists('comuna');
     }
 }

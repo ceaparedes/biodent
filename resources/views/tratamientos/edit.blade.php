@@ -34,10 +34,10 @@
         {!!Form::label('tra_costo', 'Costo Tratamiento')!!}
        {!!Form::number('tra_costo', $tratamientos->tra_costo, ['class'=>'form-control'])!!}
       </div>
-   
-
+   </div>
+   <div class ="box-footer">
       <div class="form-horizontal col-lg-7">
-        {!!Form::submit('Crear Tratamiento',['class'=>'btn btn-primary'])!!}
+        {!!Form::submit('Actualizar Tratamiento',['class'=>'btn btn-success'])!!}
       </div>
     </div>
 </div>

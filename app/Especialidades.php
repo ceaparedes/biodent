@@ -13,7 +13,7 @@ class Especialidades extends Model
 
 
     //join
-    public function especialidad_odontologo(){
-    	return $this->belongsToMany('App\EspecialidadOdontologo','eso_id');
+    public function especialidad_usuario(){
+    	return $this->belongsToMany('App\EspecialidadUsuario','esp_id');
     }
 }

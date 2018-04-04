@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddEspecialidades extends Migration
+class AddEstadosPlanesDeTratamientos extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class AddEspecialidades extends Migration
      */
     public function up()
     {
-        Schema::create('especialidades', function (Blueprint $table) {
-            $table->increments('esp_id');
-            $table->string('esp_nombre',100);
-          $table->timestamps();
+        Schema::create('estados_planes_de_tratamientos', function (Blueprint $table) {
+            $table->increments('ept_id');
+            $table->string('ept_estado', 50);
+            $table->timestamps();
         });
     }
 
@@ -27,6 +27,6 @@ class AddEspecialidades extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('especialidades');
+        Schema::dropIfExists('estados_planes_de_tratamientos');
     }
 }

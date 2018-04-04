@@ -15,11 +15,15 @@ class AddRecepcionesMateriales extends Migration
     {
         Schema::create('recepciones_materiales', function (Blueprint $table) {
             $table->increments('rep_id');
-            $table->integer('mat_codigo')->unsigned();
-            $table->string('rep_proveedor',100);
-            $table->integer('rep_cantidad');
-            $table->string('rep_codigo_recepcion',100);
+            $table->integer('mat_id')->unsigned();
+            $table->integer('rep_codigo');
+            $table->string('rep_proveedor', 100)->nullable();
+            $table->integer('rep_cantidad')->nullable();
+            $table->integer('rep_monto_gastado')->nullable();
+            $table->date('rep_fecha_compra')->nullable();
             $table->timestamps();
+
+            $table->foreign('mat_id')->references('mat_id')->on('materiales')->onDelete('cascade');
         });
     }
 

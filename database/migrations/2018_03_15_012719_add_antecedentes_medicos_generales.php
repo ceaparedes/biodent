@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddAbonosTratamientos extends Migration
+class AddAntecedentesMedicosGenerales extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,15 @@ class AddAbonosTratamientos extends Migration
      */
     public function up()
     {
-        Schema::create('abonos_tratamientos', function (Blueprint $table) {
-            $table->increments('abt_id');
-            $table->integer('pdt_id')->unsigned();
+       Schema::create('antecedentes_medicos_generales', function (Blueprint $table) {
+            $table->increments('amg_id');
             $table->integer('pac_id')->unsigned();
-            //$table->date('abt_fecha_pago');
-            $table->integer('abt_monto_abonado');
-
-            $table->foreign('pdt_id')->references('pdt_id')->on('planes_de_tratamientos')->onDelete('cascade');
-            $table->foreign('pac_id')->references('pac_id')->on('pacientes')->onDelete('cascade');
+            $table->integer('tan_id')->unsigned();
+            $table->string('amg_descripcion', 250)->nullable();
             $table->timestamps();
+
+            $table->foreign('pac_id')->references('pac_id')->on('pacientes')->onDelete('cascade');
+            $table->foreign('tan_id')->references('tan_id')->on('tipos_antecedentes');
         });
     }
 
@@ -33,6 +32,6 @@ class AddAbonosTratamientos extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('abonos_tratamiento');
+        Schema::dropIfExists('antecedentes_medicos_generales');    
     }
 }
