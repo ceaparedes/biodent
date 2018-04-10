@@ -13,7 +13,7 @@
 
     @if (count($errors) > 0)
         <div class="alert alert-danger">
-            <strong>Whoops!</strong> {{ trans('adminlte_lang::message.someproblems') }}<br><br>
+            <strong>Whoops!</strong> {{ trans('Usuario o Contraseña Incorrectos') }}<br><br>
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -27,8 +27,8 @@
     <form action="{{ url('/login') }}" method="post">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="form-group has-feedback">
-            <input type="email" class="form-control" placeholder="{{ trans('adminlte_lang::message.email') }}" name="email"/>
-            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            <input type="text" class="form-control" placeholder="{{ trans('Usuario') }}" name="email"/>
+            <span class="glyphicon glyphicon-user form-control-feedback"></span>
         </div>
         <div class="form-group has-feedback">
             <input type="password" class="form-control" placeholder="{{ trans('adminlte_lang::message.password') }}" name="password"/>
@@ -42,16 +42,13 @@
                     </label>
                 </div>
             </div><!-- /.col -->
-            <div class="col-xs-4">
+            <div class="col-xs-6">
                 <button type="submit" class="btn btn-primary btn-block btn-flat">{{ trans('adminlte_lang::message.buttonsign') }}</button>
             </div><!-- /.col -->
         </div>
     </form>
-
-    @include('auth.partials.social_login')
-
     <a href="{{ url('/password/reset') }}">{{ trans('adminlte_lang::message.forgotpassword') }}</a><br>
-    <a href="{{ url('/register') }}" class="text-center">{{ trans('adminlte_lang::message.registermember') }}</a>
+    
 
 </div><!-- /.login-box-body -->
 

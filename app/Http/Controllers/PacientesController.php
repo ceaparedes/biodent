@@ -187,7 +187,7 @@ public function create(){
 
     }
       else{
-         return redirect('pacientes/create')
+         return redirect()->route('pacientes.edit', ['id' => $id])
                         ->withErrors('El RUT ingresado no es un rut valido')
                         ->withInput();
     }

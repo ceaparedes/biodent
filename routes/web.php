@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
+//rutas autenticacion
 
 //rutas pacientes
 route::resource('pacientes','PacientesController');

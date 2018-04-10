@@ -43,6 +43,11 @@
 			{!!Form::text('usu_rut_completo', null, ['class' => 'form-control', 'id' => 'rut']) !!}
 		</div>
 
+    <div class="col-lg-6">
+      {!!Form::label('usu_fecha_nacimiento', 'Fecha de Nacimiento')!!}
+      {!!Form::date('usu_fecha_nacimiento', null, ['class' =>'form-control'])!!}
+    </div>
+
 		<div class="col-lg-6">
 			{!!Form::label('usu_direccion', 'Dirección')!!}
 			{!!Form::text('usu_direccion', null, ['class' =>'form-control'])!!}
@@ -97,11 +102,21 @@
          
    </div>
    	<div class="box-footer">
-   		{!!Form::submit('Crear Usuario',['class'=>'btn btn-success', 'id' => 'crear'])!!}
+      <div class="form-horizontal" align="center">
+   		   {!!Form::submit('Crear Usuario',['class'=>'btn btn-success', 'id' => 'crear'])!!}
+      </div>
    	</div>
   </div>
 
+<script type="text/javascript">
 
+
+  $(function(){
+      $("#rut").rut();
+  }
+  );
+
+</script>
 
 
 <script type="text/javascript">
@@ -148,27 +163,6 @@
   //funcion en la que tengo problema
 
 
-  $(document).on('click', '#crear', function(){
-      
-  var selects = document.getElementById("esp_id[]"),
-      i,
-      current,
-      selected = {};
-      for(i = 0; i < selects.length; i++){
-        current = selects.options[selects.selectedIndex].text;
-        if (selected[current]) {
-
-          alert("Debe seleccionar un solo tipo por Antecedente");
-          return false;
-        } else{
-          selected[current] = true;
-               }
-      }
-     
-      return true;
-
-      
-  });
 
 </script>
 
