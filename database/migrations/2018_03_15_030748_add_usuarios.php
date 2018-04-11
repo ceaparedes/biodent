@@ -25,7 +25,7 @@ class AddUsuarios extends Migration
             $table->string('usu_email', 200)->nullable();
             $table->integer('usu_telefono')->nullable();
             $table->string('usu_direccion', 200)->nullable();
-            $table->string('usu_usuario', 30);
+            $table->string('usu_usuario', 30)->unique();
             $table->string('usu_password', 255);
             $table->enum('usu_rol',['Odontologo', 'Asistente', 'Administrador']);
             $table->string('remember_token', 100)->nullable()
