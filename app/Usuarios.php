@@ -14,4 +14,9 @@ class Usuarios extends Model
     public function especialidad_Usuario(){
     	$this->belongsToMany('App\EspecialidadUsuario', 'usu_id');
     }
+
+    public function getAuthPassword()
+    {
+        return $this->usu_password;
+    }
 }

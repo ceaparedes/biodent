@@ -15,9 +15,9 @@ class AddTratamientos extends Migration
     {
         Schema::create('tratamientos', function (Blueprint $table) {
             $table->increments('tra_id');
-            $table->string('tra_nombre');
-            $table->string('tra_descripcion')->nullable();
-            $table->integer('tra_costo');
+            $table->string('tra_nombre', 200);
+            $table->integer('tra_costo')->nullable();
+            $table->integer('tra_costo_laboratorio')->nullable();
             $table->timestamps();
         });
 

@@ -17,14 +17,17 @@ use Illuminate\Support\Facades\View;
 class PacientesController extends Controller
 {
 
+  public function __construct()
+  {
+      $this->middleware('auth');
+  }
+
 //funcion index
 public function index(){
 
   $pacientes = Pacientes::orderBy('pac_id','ASC')->paginate(10); 
   return view('pacientes.index')->with('pacientes',$pacientes);
 }
-
-
 
 
 //function create

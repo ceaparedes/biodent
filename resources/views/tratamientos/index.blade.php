@@ -24,8 +24,8 @@
 			<thead>
 				<th>#</th>
 				<th>Nombre Tratamiento</th>
-				<th>Descripcion</th>
-				<th>Costo</th>
+				<th>Gasto de Laboratorio</th>
+				<th>Costo Total Tratamiento</th>
 				<th>Opciones</th>
 			</thead>
 			<tbody>
@@ -33,7 +33,7 @@
 					<tr>
 						<td>{{ $loop->iteration}}</td>
 						<td>{{ $tratamiento->tra_nombre }}</td>
-						<td>{{ $tratamiento->tra_descripcion }}</td>
+						<td>{{ $tratamiento->tra_costo_laboratorio}}</td>
 						<td>{{ $tratamiento->tra_costo }}</td>
 						<td>
 							<a href=" {{route('tratamientos.edit',$tratamiento->tra_id)}} " class="btn btn-warning"><i class="glyphicon glyphicon-wrench"></i></a> 

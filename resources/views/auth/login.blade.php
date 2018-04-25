@@ -8,12 +8,13 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="{{ url('/home') }}"><b>Admin</b>LTE</a>
+            <h2>Clínica dental <strong>Biodent</strong></h2>
+            <h4>Inicio de Sesión</h4>
         </div><!-- /.login-logo -->
 
     @if (count($errors) > 0)
         <div class="alert alert-danger">
-            <strong>Whoops!</strong> {{ trans('Usuario o Contraseña Incorrectos') }}<br><br>
+            <strong>Whoops!</strong> {{ trans('Ha ocurrido un Error') }}<br><br>
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -27,7 +28,7 @@
     <form action="{{ url('/login') }}" method="post">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="form-group has-feedback">
-            <input type="text" class="form-control" placeholder="{{ trans('Usuario') }}" name="email"/>
+            <input type="text" class="form-control" placeholder="{{ trans('Usuario') }}" name="username"/>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
         </div>
         <div class="form-group has-feedback">
@@ -43,11 +44,11 @@
                 </div>
             </div><!-- /.col -->
             <div class="col-xs-6">
-                <button type="submit" class="btn btn-primary btn-block btn-flat">{{ trans('adminlte_lang::message.buttonsign') }}</button>
+                <button type="submit" class="btn btn-primary btn-block btn-flat" >{{ trans('adminlte_lang::message.buttonsign') }}</button>
             </div><!-- /.col -->
         </div>
     </form>
-    <a href="{{ url('/password/reset') }}">{{ trans('adminlte_lang::message.forgotpassword') }}</a><br>
+    <a href="#">{{ trans('adminlte_lang::message.forgotpassword') }}</a><br>
     
 
 </div><!-- /.login-box-body -->

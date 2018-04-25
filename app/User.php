@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Usuarios;
+
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -14,8 +16,17 @@ class User extends Authenticatable
      *
      * @var array
      */
+    protected $table = 'usuarios';
+
+    protected $primaryKey = 'usu_id';
+
+    public function getAuthPassword()
+    {
+        return $this->usu_password;
+    }
+
     protected $fillable = [
-        'name', 'email', 'password',
+        'usu_usuario', 'usu_password',
     ];
 
     /**
@@ -24,6 +35,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'usu_password', 'remember_token',
     ];
+
+    
+
+   
 }

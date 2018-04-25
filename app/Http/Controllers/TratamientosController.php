@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\DB;
 
 class TratamientosController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(){
 
     	$tratamientos = Tratamientos::orderBy('tra_id','ASC')->paginate(10);
@@ -29,11 +35,14 @@ class TratamientosController extends Controller
     public function store(Request $request){
     	$this->validate($request,[
     		'tra_nombre'=>'required|regex:[^[a-zA-Z_áéíóúÁÉÍÓÚñ\s]*$]|min:3|max:100',
-    		'tra_descripcion'=>'required|regex:[^[\sa-zA-Z0-9áéíóúAÉÍÓÚÑñ.,:;-]+$]|min:3|max:100',
+            'tra_costo_laboratorio'=>'integer|min:0|max:999999999',
     		'tra_costo'=>'required|integer|min:1|max:999999999'
     	]);
 
     	$tratamientos = new Tratamientos($request->all());
+        if ($request->tra_costo_laboratorio == null) {
+            $tratamientos->tra_costo_laboratorio = 0;
+        }
     
     	$tratamientos->save();
 
@@ -51,14 +60,18 @@ class TratamientosController extends Controller
     public function update(Request $request, $id){
     	$this->validate($request,[
     		'tra_nombre'=>'required|regex:[^[a-zA-Z_áéíóúÁÉÍÓÚñ\s]*$]|min:3|max:100',
-    		'tra_descripcion'=>'required|regex:[^[\sa-zA-Z0-9áéíóúAÉÍÓÚÑñ.,:;-]+$]|min:3|max:100',
+            'tra_costo_laboratorio'=>'integer|min:0|max:999999999',
     		'tra_costo'=>'required|integer|min:1|max:999999999'
     	]);
 
     	$tratamientos = Tratamientos::findOrFail($id);
     	$tratamientos->tra_nombre = $request->tra_nombre;
-    	$tratamientos->tra_descripcion = $request->tra_descripcion;
     	$tratamientos->tra_costo = $request->tra_costo;
+        if ($request->tra_costo_laboratorio == Null) {
+            $tratamientos->tra_costo_laboratorio = 0;
+        }else{
+            $tratamientos->tra_costo_laboratorio = $request->tra_costo_laboratorio;
+        }
 
     	$tratamientos->save();
 

@@ -9,7 +9,7 @@ class Tratamientos extends Model
     protected $table = 'tratamientos';
     protected $primaryKey = 'tra_id';
 
-    protected $fillable = ['tra_nombre','tra_descripcion','tra_costo'];
+    protected $fillable = ['tra_nombre','tra_descripcion','tra_costo_laboratorio', 'tra_costo'];
 
 /*
     public function plan_de_tratamiento_tratamiento(){

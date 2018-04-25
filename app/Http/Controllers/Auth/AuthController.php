@@ -40,12 +40,32 @@ class AuthController extends Controller
         $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
     }
 
+    public function postLogin(Request $request)
+    {
+        $this->validate($request, [
+            'usu_usuario' => 'required', 'password' => 'required',
+        ]);
+
+        $credentials = $request->only('usu_usuario', 'password');
+
+        if ($this->auth->attempt($credentials, $request->has('remember')))
+        {
+            return redirect()->intended($this->redirectPath());
+        }
+
+        return redirect($this->loginPath())
+            ->withInput()
+            ->withErrors('Usuario o Contraseña Incorrectos');
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+
+    /*
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -55,13 +75,15 @@ class AuthController extends Controller
             'terms' => 'required',
         ]);
     }
-
+    */
     /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
      * @return User
      */
+
+    /*
     protected function create(array $data)
     {
         return User::create([
@@ -70,4 +92,6 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    */
 }

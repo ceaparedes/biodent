@@ -28,7 +28,7 @@ class AddUsuarios extends Migration
             $table->string('usu_usuario', 30)->unique();
             $table->string('usu_password', 255);
             $table->enum('usu_rol',['Odontologo', 'Asistente', 'Administrador']);
-            $table->string('remember_token', 100)->nullable()
+            $table->string('remember_token', 100)->nullable();
             $table->timestamps();
 
             $table->foreign('com_id')->references('com_id')->on('comuna');

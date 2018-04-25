@@ -23,55 +23,58 @@
                
                 
                 @if (Auth::guest())
-                    <li><a href="{{ url('/login') }}">{{ trans('Cerrar Sesion') }}</a></li> <!--modificado para el informe-->
+                    <li><a href="{{ url('/login') }}">{{ trans('Iniciar Sesión') }}</a></li> <!--modificado para el informe-->
                 @else
                     <!-- User Account Menu -->
                     <li class="dropdown user user-menu">
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!-- The user image in the navbar-->
-                            <img src="{{asset('/img/user2-160x160.jpg')}}" class="user-image" alt="User Image"/>
+                            
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs">{{ Auth::user()->name }}</span>
+                            <span class="hidden-xs">Opciones</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
                             <li class="user-header">
-                                <img src="{{asset('/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image" />
+                                
                                 <p>
-                                    {{ Auth::user()->name }}
-                                    <small>{{ trans('adminlte_lang::message.login') }} Nov. 2012</small>
+                                    {{ Auth::user()->usu_nombres }} {{Auth::user()->usu_apellido_paterno }}</br>
+                                    {{Auth::user()->usu_rut}} - {{Auth::user()->usu_dv}}</br>
+                                    {{Auth::user()->usu_rol}}</br>
+                                    {{ trans('Opciones a las que puede acceder') }}
                                 </p>
                             </li>
                             <!-- Menu Body -->
                             <li class="user-body">
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">{{ trans('adminlte_lang::message.followers') }}</a>
+                                <div class="pull-left">
+                                    @if(Auth::user()->usu_rol != 'Administrador')
+                                    {!!Form::open(['route'=>['usuarios.editprofile', Auth::user()->usu_id], 'method' =>'GET', 'id'=>'usuarios_update' ,'name'=>'usuarios_update'])!!}
+                                    <button class="btn-btn-default btn-flat">Ver Perfil</button>
+                                    {!!Form::close()!!}
+                                    @else
+                                    {!!Form::open(['route'=>['usuarios.edit', Auth::user()->usu_id], 'method' =>'GET', 'id'=>'usuarios_update' ,'name'=>'usuarios_update'])!!}
+                                    <button class="btn-btn-default btn-flat">Ver Perfil</button>
+                                    {!!Form::close()!!}
+                                    @endif
                                 </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">{{ trans('adminlte_lang::message.sales') }}</a>
-                                </div>
-                                <div class="col-xs-4 text-center">
-                                    <a href="#">{{ trans('adminlte_lang::message.friends') }}</a>
+                                <div class="pull-right">
+                                    <form method="POST" action="{{route('logout')}}">
+                                        {{ csrf_field()}}
+                                        <button class="btn-btn-default btn-flat">Cerrar Sesión</button>
+                                        
+                                    <!--<a href="{{ url('/logout') }}" class="btn btn-default btn-flat">{{ trans('Cerrar Sesión') }}</a>-->
+                                    </form>
                                 </div>
                             </li>
                             <!-- Menu Footer-->
-                            <li class="user-footer">
-                                <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">{{ trans('adminlte_lang::message.profile') }}</a>
-                                </div>
-                                <div class="pull-right">
-                                    <a href="{{ url('/logout') }}" class="btn btn-default btn-flat">{{ trans('adminlte_lang::message.signout') }}</a>
-                                </div>
-                            </li>
+                           
                         </ul>
                     </li>
                 @endif
 
                 <!-- Control Sidebar Toggle Button -->
-                <li>
-                    <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                </li>
+               
             </ul>
         </div>
     </nav>

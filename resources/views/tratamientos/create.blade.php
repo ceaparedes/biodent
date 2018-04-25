@@ -5,6 +5,18 @@
 
 @section('main-content')
 
+@if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+@endif
+
+@if (session('destroyStatus'))
+    <div class="alert alert-danger">
+        {{ session('destroyStatus') }}
+    </div>
+@endif
+
   @if (count($errors) > 0)
       <div class="alert alert-danger">
           <ul>
@@ -26,18 +38,18 @@
         {!!Form::text('tra_nombre', null, ['class'=>'form-control'])!!}
       </div>
 
-      <div class="col-lg-12">
-        {!!Form::label('tra_descripcion', 'Descripcion breve')!!}
-        {!!Form::textarea('tra_descripcion', null, ['class'=>'form-control'])!!}
+      <div class="col-lg-6">
+        {!!Form::label('tra_costo_laboratorio', 'Costo Laboratorio')!!}
+       {!!Form::number('tra_costo_laboratorio', null, ['class'=>'form-control'])!!}
       </div>
       
-      <div class="col-lg-7">
-        {!!Form::label('tra_costo', 'Costo Tratamiento')!!}
+      <div class="col-lg-6">
+        {!!Form::label('tra_costo', 'Costo Total Tratamiento')!!}
        {!!Form::number('tra_costo', null, ['class'=>'form-control'])!!}
       </div>
    </div>
    <div class="box-footer">
-      <div class="form-horizontal col-lg-7">
+      <div class="form-horizontal" align="center">
         {!!Form::submit('Crear Tratamiento',['class'=>'btn btn-success'])!!}
       </div>
   </div>

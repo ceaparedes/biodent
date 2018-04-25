@@ -5,6 +5,18 @@
 
 @section('main-content')
 
+@if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+@endif
+
+@if (session('destroyStatus'))
+    <div class="alert alert-danger">
+        {{ session('destroyStatus') }}
+    </div>
+@endif
+
 
 {!!Form::open(['route'=>['usuarios.show', $usuario], 'method' =>'POST', 'id'=>'usuarios_show' ,'name'=>'usuarios_show'])!!}
 <div class="box box-primary">
@@ -98,7 +110,7 @@
     </div>
    	<div class="box-footer">
    	</div>
-  </div>
+ </div>
 
 <script type="text/javascript">
 

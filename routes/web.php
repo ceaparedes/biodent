@@ -14,7 +14,12 @@
 /*Route::get('/', function () {
     return view('welcome');
 });*/
-//rutas autenticacion
+
+//principio, pagina por defecto
+Route::get('/dashboard', function(){
+	return view('dashboard');
+});
+
 
 //rutas pacientes
 route::resource('pacientes','PacientesController');
@@ -29,6 +34,15 @@ route::get('usuarios/{id}/destroy',[
 			'uses'=> 'UsuariosController@destroy',
 			'as' => 'usuarios.destroy'
 
+]);
+//editar Perfil
+route::get('usuarios/{id}/editprofile',[
+		'uses' => 'UsuariosController@editprofile',
+		'as'=> 'usuarios.editprofile'
+]);
+route::put('usuarios/{id}/updateprofile',[
+		'uses' => 'UsuariosController@updateprofile',
+		'as' => 'usuarios.updateprofile',
 ]);
 
 //Rutas Especialidades
@@ -46,3 +60,10 @@ route::get('tratamientos/{id}/destroy',[
 			'as' => 'tratamientos.destroy'
 
 ]);
+//rutas autenticacion
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login')->middleware('guest');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
+
+

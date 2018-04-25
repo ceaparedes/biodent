@@ -5,6 +5,18 @@
 
 @section('main-content')
 
+@if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+@endif
+
+@if (session('destroyStatus'))
+    <div class="alert alert-danger">
+        {{ session('destroyStatus') }}
+    </div>
+@endif
+
 {!!Form::open(['route'=>['pacientes.show', $paciente], 'method' =>'POST', 'id'=>'pacientes_show' ,'name'=>'pacientes_show'])!!}
 <div class="box box-primary">
   <div class="box-header">
