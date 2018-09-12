@@ -80,7 +80,7 @@
       </div>
 
       <div class="col-lg-6">
-        {!!Form::label('pac_email', 'Email Usuario')!!}
+        {!!Form::label('pac_email', 'Email Paciente')!!}
         {!!Form::text('pac_email', null, ['class'=>'form-control'])!!}
       </div>
 
@@ -196,27 +196,6 @@
     });
   });
 
-
-//funcion para verificar que los antecedentes tengan distinto tipo
-  $(document).on('click', '#crear', function(){
-      
-  var selects = document.getElementsByTagName("select"),
-      i,
-      current,
-      selected = {};
-  for(i = 0; i < selects.length; i++){
-    current = selects[i].selectedIndex;
-    if (selected[current]) {
-      alert("Debe seleccionar un solo tipo por Antecedente");
-      return false;
-    } else
-      selected[current] = true;
-  }
- 
-  return true;
-
-      
-  });
 
 
 </script>

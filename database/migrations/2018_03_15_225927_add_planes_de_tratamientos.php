@@ -20,7 +20,6 @@ class AddPlanesDeTratamientos extends Migration
             $table->integer('ept_id')->unsigned();
             $table->date('pdt_fecha_inicio')->nullable();
             $table->date('pdt_fecha_termino')->nullable();
-            $table->string('pdt_detalle', 250)->nullable();
             $table->integer('pdt_costo_total');
             $table->timestamps();
 

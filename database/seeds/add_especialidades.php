@@ -28,24 +28,26 @@ class add_especialidades extends Seeder
 
         DB::table('especialidades')->insert([
             'esp_nombre' => 'Implantologo',
-
         ]);
 
          DB::table('especialidades')->insert([
-            'esp_nombre' => 'OdontoPediatra',
+            'esp_nombre' => 'Odontopediatra',
 
         ]);
 
         DB::table('especialidades')->insert([
-            'esp_nombre' => 'Patologista Máxilo Facial',
-
+            'esp_nombre' => 'Cirujano Máxilo Facial',
         ]);
 
-         DB::table('especialidades')->insert([
-            'esp_nombre' => 'Restaurador Odontológico',
+        DB::table('especialidades')->insert([
+            'esp_nombre' => 'Radiólogo Máxilo Facial',
+        ]);
 
+        DB::table('especialidades')->insert([
+            'esp_nombre' => 'Estética Facial',
         ]);
 
 
+  
     }
 }

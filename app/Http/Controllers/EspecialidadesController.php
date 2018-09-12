@@ -10,6 +10,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 
+
 class EspecialidadesController extends Controller
 {
 

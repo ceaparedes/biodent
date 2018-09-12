@@ -21,4 +21,12 @@ class Pacientes extends Model
 		return $this->belongsTo('App\Comuna','pac_id');
 	}
 
+		public function plan_de_tratamiento(){
+		return $this->belongsToMany('App\PlanesdeTratamientos','pac_id');
+	}
+
+	 public function abonos(){
+    	return $this->belongsTo('App\AbonosTratamientos','pac_id');
+    }
+
 }

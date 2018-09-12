@@ -15,6 +15,12 @@ class Usuarios extends Model
     	$this->belongsToMany('App\EspecialidadUsuario', 'usu_id');
     }
 
+    public function planes_de_tratamientos(){
+        $this->belongsToMany('App\PlanesDeTratamientos', 'usu_id');
+    }
+
+    
+
     public function getAuthPassword()
     {
         return $this->usu_password;

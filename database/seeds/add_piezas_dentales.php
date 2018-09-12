@@ -171,5 +171,119 @@ class add_piezas_dentales extends Seeder
             'pde_nombre_pieza' => 'Tercer Molar Inferior Derecho',
         ]);
 
+        DB::table('piezas_dentales')->insert([
+            'pde_codigo_pieza' => '5.1',
+            'pde_nombre_pieza' => 'Incisivo Central Superior Derecho Temporal',
+        ]);
+
+        DB::table('piezas_dentales')->insert([
+            'pde_codigo_pieza' => '5.2',
+            'pde_nombre_pieza' => 'Incisivo Lateral Superior Derecho Temporal',
+        ]);
+
+        DB::table('piezas_dentales')->insert([
+            'pde_codigo_pieza' => '5.3',
+            'pde_nombre_pieza' => 'Canino Superior Derecho Temporal',
+        ]);
+
+        DB::table('piezas_dentales')->insert([
+            'pde_codigo_pieza' => '5.4',
+            'pde_nombre_pieza' => 'Primer Molar Superior Derecho Temporal',
+        ]);
+
+        DB::table('piezas_dentales')->insert([
+            'pde_codigo_pieza' => '5.5',
+            'pde_nombre_pieza' => 'Segundo Molar Superior Derecho Temporal',
+        ]);
+
+        DB::table('piezas_dentales')->insert([
+            'pde_codigo_pieza' => '6.1',
+            'pde_nombre_pieza' => 'Incisivo Central Superior Izquierdo Temporal',
+        ]);
+
+        DB::table('piezas_dentales')->insert([
+            'pde_codigo_pieza' => '6.2',
+            'pde_nombre_pieza' => 'Incisivo Lateral Superior Izquierdo Temporal',
+        ]);
+
+        DB::table('piezas_dentales')->insert([
+            'pde_codigo_pieza' => '6.3',
+            'pde_nombre_pieza' => 'Canino Superior Izquiedo Temporal',
+        ]);
+
+        DB::table('piezas_dentales')->insert([
+            'pde_codigo_pieza' => '6.4',
+            'pde_nombre_pieza' => 'Primer Molar Superior Izquierdo Temporal',
+        ]);
+
+        DB::table('piezas_dentales')->insert([
+            'pde_codigo_pieza' => '6.5',
+            'pde_nombre_pieza' => 'Segundo Molar Superior Izquierdo Temporal',
+        ]);
+
+        DB::table('piezas_dentales')->insert([
+            'pde_codigo_pieza' => '7.1',
+            'pde_nombre_pieza' => 'Incisivo Central Inferior Izquierdo Temporal',
+        ]);
+
+        DB::table('piezas_dentales')->insert([
+            'pde_codigo_pieza' => '7.2',
+            'pde_nombre_pieza' => 'Incisivo Lateral Inferior Izquierdo Temporal',
+        ]);
+
+        DB::table('piezas_dentales')->insert([
+            'pde_codigo_pieza' => '7.3',
+            'pde_nombre_pieza' => 'Canino Inferior Izquiedo Temporal',
+        ]);
+
+        DB::table('piezas_dentales')->insert([
+            'pde_codigo_pieza' => '7.4',
+            'pde_nombre_pieza' => 'Primer Molar Inferior Izquierdo Temporal',
+        ]);
+
+        DB::table('piezas_dentales')->insert([
+            'pde_codigo_pieza' => '7.5',
+            'pde_nombre_pieza' => 'Segundo Molar Inferior Izquierdo Temporal',
+        ]);
+
+        DB::table('piezas_dentales')->insert([
+            'pde_codigo_pieza' => '8.1',
+            'pde_nombre_pieza' => 'Incisivo Central Inferior Derecho Temporal',
+        ]);
+
+         DB::table('piezas_dentales')->insert([
+            'pde_codigo_pieza' => '8.2',
+            'pde_nombre_pieza' => 'Incisivo Lateral Inferior Derecho Temporal',
+        ]);
+
+         DB::table('piezas_dentales')->insert([
+            'pde_codigo_pieza' => '8.3',
+            'pde_nombre_pieza' => 'Canino Inferior Derecho Temporal',
+        ]);
+
+         DB::table('piezas_dentales')->insert([
+            'pde_codigo_pieza' => '8.4',
+            'pde_nombre_pieza' => 'Primer Molar Inferior Derecho Temporal',
+        ]);
+
+         DB::table('piezas_dentales')->insert([
+            'pde_codigo_pieza' => '8.5',
+            'pde_nombre_pieza' => 'Segundo Molar Inferior Derecho Temporal',
+        ]);
+
+        DB::table('piezas_dentales')->insert([
+            'pde_codigo_pieza' => 'Arcada Supuerior',
+            'pde_nombre_pieza' => 'Arcada Supuerior',
+        ]);
+
+        DB::table('piezas_dentales')->insert([
+            'pde_codigo_pieza' => 'Arcada Inferior',
+            'pde_nombre_pieza' => 'Arcada Inferior',
+        ]);
+
+        DB::table('piezas_dentales')->insert([
+            'pde_codigo_pieza' => 'Boca Completa',
+            'pde_nombre_pieza' => 'Boca Completa',
+        ]);
     }
 }

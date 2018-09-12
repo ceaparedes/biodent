@@ -11,7 +11,7 @@ class Tratamientos extends Model
 
     protected $fillable = ['tra_nombre','tra_descripcion','tra_costo_laboratorio', 'tra_costo'];
 
-/*
+
     public function plan_de_tratamiento_tratamiento(){
 		return $this->belongsToMany('App\PlanDeTratamientoTratamiento','tra_id');
 	}
@@ -20,5 +20,5 @@ class Tratamientos extends Model
 		return $this->belongsToMany('App\SesionesEjecucionTratamientos','tra_id');
 	}
 
-*/
+
 }

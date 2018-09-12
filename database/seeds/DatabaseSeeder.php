@@ -12,7 +12,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        //$this->call(tipoAntecedenteSeeder::class);
-        // $this->call(UsersTableSeeder::class);
+        
+        $this->call(add_comuna::class);
+        $this->call(add_especialidades::class);
+        $this->call(add_estados_planes_de_tratamientos::class);
+        $this->call(add_piezas_dentales::class);
+        $this->call(add_tipos_antecedentes::class);
+        $this->call(add_tratamientos::class);
+        $this->call(add_usuarios::class);
     }
 }

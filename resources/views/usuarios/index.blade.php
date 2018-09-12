@@ -17,17 +17,15 @@
     </div>
 @endif
 
-<h1>Listado de Dentistas</h1>
+<h2>Listado de Usuarios <a class="btn btn-success pull-right" href="{{route('usuarios.create')}}">Crear Nuevo Usuario</a></h2>
 <div class="box box-primary">
 	<div class ="box-body table-responsive no-padding">	
 		<table class="table table-hover">
 			<thead>
 				<th>#</th>
 				<th>Rut Usuario</th>
-				<th>DV</th>
-				<th>Nombres Usuario</th>
-				<th>Apellido Paterno</th>
-				<th>Apellido Materno</th>
+				<th>Nombre Usuario</th>
+				<th>Teléfono</th>
 				<th>Nombre de Usuario</th>
 				<th>Rol del Usuario</th>
 				<th>Opciones</th>
@@ -36,11 +34,9 @@
 				@foreach($usuarios as $usuario)
 					<tr>
 						<td>{{ $loop->iteration}}</td>
-						<td>{{ $usuario->usu_rut }}</td>
-						<td>{{ $usuario->usu_dv }}</td>
-						<td>{{ $usuario->usu_nombres }}</td>
-						<td>{{ $usuario->usu_apellido_paterno }}</td>
-						<td>{{ $usuario->usu_apellido_materno }}</td>
+						<td>{{ $usuario->usu_rut }}-{{$usuario->usu_dv}}</td>
+						<td>{{ $usuario->usu_nombres}} {{ $usuario->usu_apellido_paterno }} {{ $usuario->usu_apellido_materno }}</td>
+						<td>{{ $usuario->usu_telefono }}</td>
 						<td>{{ $usuario->usu_usuario}}</td>
 						<td>{{ $usuario->usu_rol }} </td>
 						<td>

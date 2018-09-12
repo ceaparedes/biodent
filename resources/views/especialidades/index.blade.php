@@ -17,7 +17,7 @@
     </div>
 @endif
 
-<h2>Listado de Especialidades</h2>
+<h2>Listado de Especialidades <a class="btn btn-success pull-right" href="{{route('especialidades.create')}}">Crear Nueva Especialidad</a></h2>
 <div class="box box-primary">
 	<div class ="box-body table-responsive no-padding">	
 		<table class="table table-hover">

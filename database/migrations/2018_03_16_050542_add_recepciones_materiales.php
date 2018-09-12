@@ -19,7 +19,7 @@ class AddRecepcionesMateriales extends Migration
             $table->integer('rep_codigo');
             $table->string('rep_proveedor', 100)->nullable();
             $table->integer('rep_cantidad')->nullable();
-            $table->integer('rep_monto_gastado')->nullable();
+            $table->integer('rep_monto')->nullable();
             $table->date('rep_fecha_compra')->nullable();
             $table->timestamps();
 

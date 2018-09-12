@@ -2,7 +2,11 @@
 <header class="main-header">
 
     <!-- Logo -->
-    <a href="{{ url('/home') }}" class="logo">
+    @if (!Auth::user())
+        <a href="{{ url('/login') }}" class="logo">
+    @else
+        <a href="{{ url('/dashboard') }}" class="logo">
+    @endif
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>CDB</b></span>
         <!-- logo for regular state and mobile devices -->
@@ -12,9 +16,7 @@
     <!-- Header Navbar -->
     <nav class="navbar navbar-static-top" role="navigation">
         <!-- Sidebar toggle button-->
-        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-            <span class="sr-only">{{ trans('adminlte_lang::message.togglenav') }}</span>
-        </a>
+      
         <!-- Navbar Right Menu -->
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
@@ -23,7 +25,7 @@
                
                 
                 @if (Auth::guest())
-                    <li><a href="{{ url('/login') }}">{{ trans('Iniciar Sesión') }}</a></li> <!--modificado para el informe-->
+                   <!-- <li><a href="{{ url('/login') }}">{{ trans('Iniciar Sesión') }}</a></li> --><!--modificado para el informe-->
                 @else
                     <!-- User Account Menu -->
                     <li class="dropdown user user-menu">
@@ -39,7 +41,7 @@
                             <li class="user-header">
                                 
                                 <p>
-                                    {{ Auth::user()->usu_nombres }} {{Auth::user()->usu_apellido_paterno }}</br>
+                                    {{Auth::user()->usu_nombres }} {{Auth::user()->usu_apellido_paterno }}</br>
                                     {{Auth::user()->usu_rut}} - {{Auth::user()->usu_dv}}</br>
                                     {{Auth::user()->usu_rol}}</br>
                                     {{ trans('Opciones a las que puede acceder') }}

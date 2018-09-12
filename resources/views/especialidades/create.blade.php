@@ -39,7 +39,7 @@
     </div>
   </div>
   <div class="box-footer">
-    <div class="form-horizontal col-lg-6 ">
+    <div class="form-horizontal col-lg-6" align="center">
       {{Form::submit('Crear Especialidad',['class'=>'btn btn-success'])}}
     </div>
   {!!Form::close()!!}

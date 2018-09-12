@@ -6,6 +6,7 @@ use App\Pacientes;
 use App\AntecedentesMedicosGenerales;
 use App\TiposAntecedentes;
 use App\Comuna;
+use App\PlanesDeTratamientos;
 //use laravel tools & helpers
 use Malahierba\ChileRut\ChileRut;
 use Illuminate\Http\Request;
@@ -26,6 +27,13 @@ class PacientesController extends Controller
 public function index(){
 
   $pacientes = Pacientes::orderBy('pac_id','ASC')->paginate(10); 
+  
+  foreach ($pacientes as $pac) {
+       $pac->plan_existente = PlanesDeTratamientos::where('pac_id',$pac->pac_id)->count();
+       $pac->comuna = Comuna::findOrFail($pac->com_id);
+  }
+
+  
   return view('pacientes.index')->with('pacientes',$pacientes);
 }
 
@@ -44,26 +52,26 @@ public function create(){
 
 //function store
   public function store(Request $request){
-      //validaciones  
+      //validaciones 
+      
       $this->validate($request, [
         'pac_rut_completo' => 'required',
         'pac_edad'=>'required|min:1|max:117|integer',
-        'pac_fecha_nacimiento'=>'required',
+        'pac_fecha_nacimiento'=>'required|date',
         'pac_nombres'=>'required|regex:[^[a-zA-Z_áéíóúÁÉÍÓÚñ\s]*$]|min:3|max:100',
         'pac_apellido_paterno'=>'required|regex:[^[a-zA-Z_áéíóúÁÉÍÓÚñ\s]*$]|min:3|max:50',
         'pac_apellido_materno'=>'required|regex:[^[a-zA-Z_áéíóúÁÉÍÓÚñ\s]*$]|min:3|max:50',
         'pac_direccion'=>'required|regex:[^[\sa-zA-Z0-9áéíóúAÉÍÓÚÑñ.,#:;-]+$]|min:3|max:200',
-        'pac_telefono'=>'required|integer|min:111111111|max:99999999999',
+        'pac_telefono'=>'required|integer|min:111111111|max:999999999',
         'pac_observaciones'=>'required|regex:[^[\sa-zA-Z0-9áéíóúAÉÍÓÚÑñ.,:;-]+$]|min:3|max:200',
         'pac_motivo'=>'required|regex:[^[\sa-zA-Z0-9áéíóúAÉÍÓÚÑñ.,:;-]+$]|min:3|max:200',
         'com_id'=>'required',
         'pac_email' => 'required|email',
-        'pac_fecha_nacimiento'=>'date',
-      ]);
+      ]); 
       
-   
+
      $paciente = new Pacientes($request->all());
-    
+       
     //validacion rut ingresado
      $rut_completo = $request->pac_rut_completo;  
      $chilerut = new ChileRut;

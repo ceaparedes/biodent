@@ -15,22 +15,11 @@ class AddPiezasDentales extends Migration
     {
         Schema::create('piezas_dentales', function (Blueprint $table) {
             $table->increments('pde_id');
-            $table->string('pde_codigo_pieza', 3);
+            $table->string('pde_codigo_pieza', 20);
             $table->string('pde_nombre_pieza');
             $table->timestamps();
         });
 
-
-        Schema::create('plan_pieza_dental', function(Blueprint $table){
-            $table->increments('ppd_id');
-            $table->integer('pde_id')->unsigned();
-            $table->integer('pdt_id')->unsigned();
-            $table->timestamps();
-
-            $table->foreign('pde_id')->references('pde_id')->on('piezas_dentales');
-            $table->foreign('pdt_id')->references('pdt_id')->on('planes_de_tratamientos')->onDelete('cascade');
-
-        });
     }
 
     /**

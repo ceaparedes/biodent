@@ -26,9 +26,11 @@ class AddTratamientos extends Migration
             $table->increments('ptt_id');
             $table->integer('pdt_id')->unsigned();
             $table->integer('tra_id')->unsigned();
+            $table->integer('pde_id')->unsigned()->nullable();
             $table->timestamps();
 
             $table->foreign('pdt_id')->references('pdt_id')->on('planes_de_tratamientos')->onDelete('cascade');
+            $table->foreign('pde_id')->references('pde_id')->on('piezas_dentales');
             $table->foreign('tra_id')->references('tra_id')->on('tratamientos');
         });
     }

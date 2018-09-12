@@ -37,18 +37,14 @@
         </div>
         <div class="row">
             <div class="col-xs-8">
-                <div class="checkbox icheck">
-                    <label>
-                        <input type="checkbox" name="remember"> {{ trans('adminlte_lang::message.remember') }}
-                    </label>
-                </div>
+                
             </div><!-- /.col -->
             <div class="col-xs-6">
                 <button type="submit" class="btn btn-primary btn-block btn-flat" >{{ trans('adminlte_lang::message.buttonsign') }}</button>
             </div><!-- /.col -->
         </div>
     </form>
-    <a href="#">{{ trans('adminlte_lang::message.forgotpassword') }}</a><br>
+    <br>
     
 
 </div><!-- /.login-box-body -->

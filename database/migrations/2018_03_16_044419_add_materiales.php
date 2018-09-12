@@ -20,9 +20,8 @@ class AddMateriales extends Migration
             $table->integer('mat_costo');
             $table->integer('mat_stock');
             $table->integer('mat_stock_minimo');
-            $table->string('mat_unidad_medida', 50);
             $table->date('mat_fecha_creacion')->nullable();
-            $table->date('mat_fecha_actualización')->nullable();
+            $table->date('mat_fecha_actualizacion')->nullable();
             $table->enum('mat_estado',['Disponible', 'Stock Critico', 'Sin stock']);
             $table->timestamps();
         });
@@ -31,6 +30,7 @@ class AddMateriales extends Migration
             $table->increments('mse_id');
             $table->integer('mat_id')->unsigned();
             $table->integer('set_id')->unsigned();
+            $table->integer('mse_cantidad')->nullable();
             $table->timestamps();
 
             $table->foreign('mat_id')->references('mat_id')->on('materiales');
