@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(add_tipos_antecedentes::class);
         $this->call(add_tratamientos::class);
         $this->call(add_usuarios::class);
+        $this->call(add_materiales::class);
     }
 }

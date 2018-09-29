@@ -182,7 +182,9 @@ return [
         //LaravelCollective (formularios)
         Collective\Html\HtmlServiceProvider::class,
         //Chilean Pack
-        Malahierba\ChileRut\ChileRutServiceProvider::class
+        Malahierba\ChileRut\ChileRutServiceProvider::class,
+        //DOMPDF
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -237,7 +239,9 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
 
-        'RUT' => Malahierba\ChileRut\Facades\ChileRut::class
+        'RUT' => Malahierba\ChileRut\Facades\ChileRut::class,
+
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 

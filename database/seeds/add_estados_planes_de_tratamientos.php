@@ -12,23 +12,23 @@ class add_estados_planes_de_tratamientos extends Seeder
     public function run()
     {
        DB::table('estados_planes_de_tratamientos')->insert([
-            'ept_estado' => 'plan de Tratamiento Creado',
+            'ept_estado' => 'Plan de Tratamiento Creado',
         ]);
 
        DB::table('estados_planes_de_tratamientos')->insert([
-            'ept_estado' => 'plan de Tratamiento Iniciado',
+            'ept_estado' => 'Plan de Tratamiento Iniciado',
         ]);
 
        DB::table('estados_planes_de_tratamientos')->insert([
-            'ept_estado' => 'plan de Tratamiento Completado',
+            'ept_estado' => 'Plan de Tratamiento Completado',
         ]);
 
        DB::table('estados_planes_de_tratamientos')->insert([
-            'ept_estado' => 'plan de Tratamiento Cancelado por el Usuario',
+            'ept_estado' => 'Plan de Tratamiento Cancelado por el Usuario',
         ]);
 
        DB::table('estados_planes_de_tratamientos')->insert([
-            'ept_estado' => 'plan de Tratamiento Finalizado',
+            'ept_estado' => 'Plan de Tratamiento Finalizado',
         ]);
 
 

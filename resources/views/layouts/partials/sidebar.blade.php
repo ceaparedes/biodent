@@ -47,8 +47,10 @@
                 <ul class="treeview-menu">
                     <li><a href="{{route('tratamientos.create')}} ">{{ trans('Crear Nuevos Tratamientos') }}</a></li>
                     <li><a href="{{route('tratamientos.index')}} ">{{ trans('Enlistar Tratamientos') }}</a></li> 
+                    @if(auth::user()->usu_rol == 'Administrador')
                     <li><a href="{{route('planes-de-tratamientos.index')}}">{{ trans('Enlistar Planes de Tratamientos') }}</a></li>
                     <li><a href="#">{{ trans('Enlistar sesiones de Tratamientos') }}</a></li>
+                    @endif
                     
                 </ul>
             </li>
@@ -63,12 +65,14 @@
                 </ul>
             </li> 
             
-            @if(auth::user()->usu_rol == 'Administrador')
+            @if(auth::user()->usu_rol != 'Asistente')
             <li class="treeview">
                 <a href="#"><i class='fa fa-copy'></i> <span>{{ trans('Informes') }}</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a href="#">{{ trans('Ver Informes de Pagos Mensuales') }}</a></li>
-                    <li><a href="#">{{ trans('Consultar Estadisticas') }}</a></li> -->
+                    @if(auth::user()->usu_rol == 'Administrador')
+                    <li><a href="#">{{ trans('Consultar Estadisticas') }}</a></li>
+                    @endif
                 </ul>
             </li>
             @endif

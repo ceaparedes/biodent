@@ -27,10 +27,10 @@
       </div>
   @endif
 
-{!!Form::open(['route'=>['sesiones-ejecucion-tratamientos-tratamientos.store', $id], 'method' =>'POST', 'id'=>'abono_create' ,'name'=>'abono_create'])!!}
+{!!Form::open(['route'=>['abonos-tratamientos.store', $id], 'method' =>'POST', 'id'=>'abono_create' ,'name'=>'abono_create'])!!}
   <div class="box box-primary">
     <div class = "box-header">
-      <h2>Creacion de Sesion de Tratamiento</h2>
+      <h2>Creacion de Abono de Tratamiento</h2>
       <h3>Información del Paciente</h3>
     </div>
     <div class="box-body">
@@ -116,7 +116,7 @@
   </div>
   <div class="box-footer">
     <div class="form-horizontal" align="center">
-          {!!Form::submit('Crear Plan de Tratamiento',['class'=>'btn btn-success', 'id' => 'crear'])!!}
+          {!!Form::submit('Crear Abono de Tratamiento',['class'=>'btn btn-success', 'id' => 'crear'])!!}
         </div>
   </div>
 </div>

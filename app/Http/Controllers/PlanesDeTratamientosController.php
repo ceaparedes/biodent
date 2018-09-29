@@ -13,6 +13,7 @@ use App\PiezasDentales;
 use App\PlandeTratamientoTratamiento;
 use App\EstadosPlanesDeTratamientos;
 use App\AbonosTratamientos;
+use App\SesionesEjecucionTratamientos;
 
 //use Laravel Tools
 use Illuminate\Http\Request;
@@ -41,7 +42,8 @@ class PlanesDeTratamientosController extends Controller
               $plan->odontologo = Usuarios::findOrFail($plan->usu_id);
               $plan->estado = EstadosPlanesDeTratamientos::findOrFail($plan->ept_id);
               $plan->abonos = AbonosTratamientos::where('pdt_id', $plan->pdt_id)->count();
-
+              $plan->sesiones = SesionesEjecucionTratamientos::where('pdt_id', $plan->pdt_id)->count();
+              
           }
           
            return view('planes-de-tratamientos.index')->with('planes', $planes);
@@ -61,6 +63,7 @@ class PlanesDeTratamientosController extends Controller
           $plan->odontologo = Usuarios::findOrFail($plan->usu_id);
           $plan->estado = EstadosPlanesDeTratamientos::findOrFail($plan->ept_id);
           $plan->abonos = AbonosTratamientos::where('pdt_id', $plan->pdt_id)->count();
+          $plan->sesiones = SesionesEjecucionTratamientos::where('pdt_id', $plan->pdt_id)->count();
         }
         
         return view('planes-de-tratamientos.pacienteindex')->with('planes', $planes)->with('id',$pac_id);
@@ -217,7 +220,13 @@ class PlanesDeTratamientosController extends Controller
         $paciente = Pacientes::findOrFail($plan->pac_id);
         $plan->pdt_costo_total = $request->pdt_costo_total;
         $plan->pac_id = $pac_id;
-        $plan->usu_id = Auth::user()->usu_id;
+        
+        if (!$request->usu_id) {
+            $plan->usu_id = Auth::user()->usu_id;
+        }else{
+            $plan->usu_id = $request->usu_id;
+        }
+
         $plan->ept_id = 1;
         $plan->save();
         $paciente->pac_observaciones = $request->pac_observaciones;
@@ -262,7 +271,7 @@ class PlanesDeTratamientosController extends Controller
     public function show($id)
     {
         $plan = PlanesDeTratamientos::findOrFail($id);
-        
+        $plan->estado = EstadosPlanesDeTratamientos::findOrFail($plan->ept_id);
         
         //información del paciente
         $paciente = Pacientes::findOrFail($plan->pac_id);
@@ -312,5 +321,56 @@ class PlanesDeTratamientosController extends Controller
 
     }
 
+     public function cancelar_plan($pdt_id)
+     {
+        $plan = PlanesDeTratamientos::findOrFail($pdt_id);
+        if ($plan->ept_id >= 3) {
+            return back()->withInput(['id', $plan->pac_id])->with('destroyStatus', '¡Este Plan esta completado o cancelado!');
+        }else{
+            $plan->ept_id = 4;
+            $plan->save();
+            return back()->withInput(['id', $plan->pac_id])->with('status', '¡Plan cancelado con exito!');
+        }
+     }
+
+     public function finalizar_plan($pdt_id)
+     {
+        $plan = PlanesDeTratamientos::findOrFail($pdt_id);
+        if ($plan->ept_id >= 3) {
+            return back()->withInput(['id', $plan->pac_id])->with('destroyStatus', '¡Este Plan esta completado o cancelado!');
+        }else{
+            $abonos = AbonosTratamientos::where('pdt_id', $pdt_id)->get();
+            $suma = 0;
+            foreach ($abonos as $aux) {
+                $suma = $suma + $aux->abt_monto_abonado;
+            }
+            if ($suma == $plan->pdt_costo_total) {
+               $plan->ept_id = 3;
+               $plan->save();
+               return back()->withInput(['id', $plan->pac_id])->with('status', '¡Plan finalizado con exito!');
+            }else{
+               return back()->withInput(['id', $plan->pac_id])->with('destroyStatus', 'este plan no ha sido completamente cancelado');
+            }
+        }
+     }
+
+
+     public function generar_pdf($pdt_id)
+     {
+        $plan = PlanesDeTratamientos::findOrFail($pdt_id);
+        $plan->paciente =Pacientes::findOrFail($plan->pac_id);
+        $plan->paciente->pac_rut_completo = $plan->paciente->pac_rut . '-' . $plan->paciente->pac_dv;
+        $plan->paciente->pac_nombre_completo = $plan->paciente->pac_nombres . ' ' . $plan->paciente->pac_apellido_paterno . ' ' . $plan->paciente->pac_apellido_materno;
+
+        $plan_detalle = DB::table('plan_de_tratamiento_tratamiento')->where('pdt_id', $plan->pdt_id)->get();
+        foreach ($plan_detalle as $detalle) {
+            $detalle->tratamiento = Tratamientos::findOrFail($detalle->tra_id);
+            $detalle->piezas_seleccionadas = PiezasDentales::findOrFail($detalle->pde_id);
+        } 
+        $name = 'Presupuesto_Paciente_'. $plan->paciente->pac_nombre_completo.'.pdf';
+        $pdf = \PDF::loadView('planes-de-tratamientos/pdf', ['plan' => $plan, 'detalle' => $plan_detalle]);
+        return $pdf->download($name); 
+        dd($plan);
+     }
 
 }

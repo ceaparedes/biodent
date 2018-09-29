@@ -43,11 +43,13 @@
 							<a href="{{ route('pacientes.show', $paciente->pac_id)}}" class="btn btn-info" title ="Ver Ficha Completa de Paciente"><i class="glyphicon glyphicon-file"></i></a>
 							<a href="{{ route('pacientes.edit', $paciente->pac_id)}}" class="btn btn-warning" title ="Actualizar Paciente"><i class="glyphicon glyphicon-wrench"></i></a>
 							@if($paciente->plan_existente > 0)
-							<a href="{{ route('planes-de-tratamientos.pacienteindex', $paciente->pac_id)}}" class="btn btn-success" title ="Crear nuevo Plan de Tratamiento"><i class="fas fa-notes-medical"></i></a>
+							<a href="{{ route('planes-de-tratamientos.pacienteindex', $paciente->pac_id)}}" class="btn btn-success" title ="Crear nuevo Plan de Tratamiento"><i class="fas fa-file-medical-alt"></i></a>
 							@else
 							<a href="{{ route('planes-de-tratamientos.create', $paciente->pac_id)}}" class="btn btn-success" title ="ver Planes de Tratamientos"><i class="fas fa-file-medical-alt"></i></a>
 							@endif
+							@if(Auth::user()->usu_rol == 'Administrador')
 							<a href="{{ route('pacientes.destroy', $paciente->pac_id)}}" onclick= "return confirm('¿Esta seguro de Eliminar al paciente?') " class="btn btn-danger" title ="Eliminar Paciente"><i class="glyphicon glyphicon-trash"></i></a>
+							@endif
 						</td>
 					</tr>
 				@endforeach

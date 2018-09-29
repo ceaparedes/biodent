@@ -65,11 +65,19 @@
         <div id = 'tipos'>
         <div class="col-lg-4">
           {!! Form::Label('tipos', 'Tipos:') !!}
-          {!! Form::select('tan_id[]', $tipos_antecedentes, $antecedentes->tan_id, ['class' => 'form-control', 'placeholder'=> 'Seleccione Un Tipo', 'id ' => 'tan_id']) !!}
+          @if($antecedentes->tan_id == 1)
+                 {!! Form::text('tan_id[]', 'Enfermedades',  ['class' => 'form-control', 'id ' => 'tan_id', 'readonly '=>"readonly" ]) !!}
+              @elseif($antecedentes->tan_id == 2)
+                 {!! Form::text('tan_id[]', 'Alergias',  ['class' => 'form-control', 'id ' => 'tan_id', 'readonly '=>"readonly" ]) !!}
+              @elseif($antecedentes->tan_id == 3)
+                 {!! Form::text('tan_id[]', 'Medicamentos',  ['class' => 'form-control', 'id ' => 'tan_id', 'readonly '=>"readonly" ]) !!}
+              @elseif($antecedentes->tan_id == 4)
+                 {!! Form::text('tan_id[]', 'Otros',  ['class' => 'form-control', 'id ' => 'tan_id', 'readonly '=>"readonly" ]) !!}
+              @endif
         </div>
         <div class="col-lg-7">
           {!!Form::label('amg_descripcion', 'Descripcion:')!!}
-          {!!Form::text('amg_descripcion[]', $antecedentes->amg_descripcion, ['class'=>'form-control'])!!}
+          {!!Form::text('amg_descripcion[]', $antecedentes->amg_descripcion, ['class'=>'form-control',  'readonly' => 'readonly']])!!}
         </div>
       @elseif(count($antecedentes)>1)
       <div id = 'tipos'>

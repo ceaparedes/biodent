@@ -53,8 +53,8 @@ class AbonosTratamientosController extends Controller
         
 
         $plan = PlanesDeTratamientos::findorFail($pdt_id);
-        if ($plan->ept_id == 5 || $plan->ept_id == 4) {
-            return redirect('planes-de-tratamientos')->with('destroyStatus', '¡Este Plan esta completado o cancelado!');
+        if ($plan->ept_id >= 3) {
+            return back()->withInput(['id', $pdt_id])->with('destroyStatus', '¡Este Plan esta completado o cancelado!');
         }
         
         $abonos_anteriores = DB::table('abonos_tratamientos')->where('pdt_id', $plan->pdt_id)->get();
@@ -82,7 +82,7 @@ class AbonosTratamientosController extends Controller
             $detalle->piezas_seleccionadas = PiezasDentales::findOrFail($detalle->pde_id);
         }
         
-        return view('abonos-tratamientos.create')->with('plan', $plan)->with('paciente', $paciente)->with('plan_detalle', $plan_detalle)->with('abonos_anteriores', $abonos_anteriores);
+        return view('abonos-tratamientos.create')->with('plan', $plan)->with('paciente', $paciente)->with('plan_detalle', $plan_detalle)->with('abonos_anteriores', $abonos_anteriores)->with('id', $pdt_id);
 
 
     } 
@@ -112,14 +112,20 @@ class AbonosTratamientosController extends Controller
         if ($suma > $plan->pdt_costo_total) {
                return back()->with('destroyStatus', '¡EL Monto ingresado es mayor al costo total!');
         }
-        
+
+        if ($suma == $plan->pdt_costo_total){
+            $mensaje = true;
+        }else{
+            $mensaje = false;
+         }
         $abono = new AbonosTratamientos();
         $abono->abt_monto_abonado = $request->abt_monto_abonado;
         $abono->abt_fecha = date('Y-m-d');
         $abono->pdt_id = $pdt_id;
         $abono->pac_id = $plan->pac_id;
         $abono->save();
-        return view('abonos-tratamientos.index')->with('id',$pdt_id)->with('status', 'Paciente Actualizado con exito!');
+        return redirect()->route('abonos-tratamientos.index', ['id' => $pdt_id])->with('status','Abono creado con exito!');
+       
     }
 
     public function destroy($id)

@@ -27,7 +27,7 @@
       </div>
   @endif
 
-{!!Form::open(['route'=>['sesiones-ejecucion-tratamientos.store', $plan->pdt_id], 'method' =>'POST', 'id'=>'sesiones_create' ,'name'=>'sesiones_create'])!!}
+{!!Form::open(['route'=>['sesiones-ejecucion-tratamientos.show', $id], 'method' =>'GET', 'id'=>'sesiones_show' ,'name'=>'sesiones_show'])!!}
   <div class="box box-primary">
     <div class = "box-header">
       <h2>Sesión de Tratamiento: {{$paciente->pac_nombre_completo}}</h2>
@@ -157,39 +157,16 @@
   <div class="box-body">
     <div class="col-lg-6">
       {!!Form::label('tra_id', 'Tratamiento')!!}
-      {!!Form::select('tratamiento_id', $tratamiento_aplicable, null , ['class'=>'form-control', 'placeholder'=> 'Seleccione', 'required' => true, 'id' => 'tratamiento_id'])!!}  
+      {!!Form::text('tra_id', $sesion->tra_id, ['class'=>'form-control',  'required' => true, 'id' => 'tratamiento_id', 'readonly'=>true])!!}  
     </div>
     <div class="col-lg-6">
       {!!Form::label('pieza_a_tratar', 'Pieza a tratar')!!}
-      {!!Form::text('pieza_a_tratar', null , ['class'=>'form-control',  'required' => true, 'readonly' => true, 'id'=>'pieza_a_tratar'])!!}
-      {!!Form::hidden('pde_id', null,['class'=>'form-control',  'required' => true, 'readonly' => true, 'id'=>'pde_id'] )!!}
+      {!!Form::text('pieza_a_tratar', $sesion->pde_id , ['class'=>'form-control',  'required' => true, 'readonly' => true, 'id'=>'pieza_a_tratar'])!!}
+      
     </div>
     </div>
 </div>
 
-<div class="box box-primary">
-  <div class="box-header">
-    <h3>Materiales a Utilizar</h3>
-  </div>
-  <div class="box-body">
-    <div class="col-lg-6">
-      {!!Form::label('material', 'Material:')!!}
-      {!!Form::select('material', $materiales, null , ['class'=>'form-control', 'placeholder'=>'Seleccione', 'id'=>'material'])!!}
-    </div>
-    <div class="col-lg-4">
-      {!!Form::label('mse_cantidad', 'Cantidad a Utilizar:')!!}
-      {!!Form::number('mse_cantidad', null, ['class'=>'form-control', 'min'=>1 , 'id' =>'mse_cantidad'])!!}
-    </div>
-    <div class="col-lg-2">
-        {!! Form::Label(' ', ' ') !!}
-        {!! Form::Label(' ', ' ') !!}
-        {!! Form::Label(' ', ' ') !!}
-        {!!Form::button('<i class="fa fa-plus" aria-hidden="true"></i> Agregar',  ['class'=>'form-control btn btn-success', 'id'=> 'agregar'])!!}
-      </div>
-  </div>
-  <div class="box-footer">
-  </div>
-</div>
 
 <div class="box box-primary">
   <div class="box-header">
@@ -197,142 +174,57 @@
   </div>
   <div class="box-body">
    <div>
+    @if(count($material_sesion) > 0)
      <table class="table table-bordered table-hover dataTable" id="tabla-materiales">
        <thead>
          <th>Material</th>
          <th>Cantidad Utilizada</th>
-         <th>Eliminar</th>
        </thead>
        <tbody id='tbody-materiales'>
+        @foreach($material_sesion as $mat)
+          <tr>
+            <td>{{$mat->material->mat_nombre_material}}</td>
+            <td>{{$mat->mse_cantidad}}</td>
+
+           </tr>
+        @endforeach
        </tbody>
        <tfoot>
        </tfoot>
      </table>
+     @else
+     <h4>No se utilizaron materiales en esta sesion</h4>
+     @endif
     </div>
   </div>
   <div class="box-footer">
     
   </div>
+
 </div>
 <div class="box box-primary">
   <div class="box-header"></div>
   <div class="box-body">
     <div class="col-lg-12">
         {!!Form::label('set_descripcion_sesion', 'Observaciones sesión:')!!}
-        {!!Form::textarea('set_descripcion_sesion', null, ['class'=>'form-control', 'rows' => 4 ])!!}
+        @if($sesion->set_descripcion_sesion != '')
+        {!!Form::textarea('set_descripcion_sesion', $sesion->set_descripcion_sesion, ['class'=>'form-control', 'rows' => 4, 'readonly' =>true])!!}
+        @else
+        {!!Form::textarea('set_descripcion_sesion', 'Sin observaciones', ['class'=>'form-control', 'rows' => 4, 'readonly' =>true])!!}
+        @endif
       </div>
-    @if(Auth::user()->usu_rol != 'Administrador')
     <div class="col-lg-6" >
         {!! Form::Label('usu_id', 'Odontologo creador de Plan:') !!}
-        {!! Form::select('usu_id', $odontologos, Auth::user()->usu_id, ['class' => 'form-control', 'placeholder'=> 'Seleccione..', 'id ' => 'usu_id', 'disabled' => true]) !!}
+        {!! Form::text('usu_id', $odontologo->usu_nombre_completo, ['class' => 'form-control', 'placeholder'=> 'Seleccione..', 'id ' => 'usu_id', 'readonly' => true]) !!}
     </div>
-    @else
-    <div class="col-lg-6" >
-        {!! Form::Label('usu_id', 'Odontologo creador de Plan:') !!}
-        {!! Form::select('usu_id', $odontologos, null, ['class' => 'form-control', 'placeholder'=> 'Seleccione..', 'id ' => 'usu_id']) !!}
-    </div>
+    
 
-    @endif
   </div>
   <div class="box-footer">
-    <div class="form-horizontal" align="center">
-          {!!Form::submit('Crear Sesión de Tratamiento',['class'=>'btn btn-success', 'id' => 'crear'])!!}
-        </div>
+    
   </div>
 </div>
-<script type="text/javascript">
-   
-$(document).ready(function(){
 
-//añadir Tratamiento
-   $('#agregar').on('click', function(){
-    if (($('#material').val() == null) || ($('#mse_cantidad').val() == null)) {
-      alert('Debe seleccionar un Material y la cantidad a gastar');
-      return false;
-   }
-
-   $.ajax({
-            url: '/biodent/public/sesiones-ejecucion-tratamientos/consultar_stock',
-            type: 'post',
-            dataType: 'json',
-            data: {
-                    "_token": "{{ csrf_token() }}",
-                    "id": $('#material').val(),
-                    "cantidad": $('#mse_cantidad').val(),
-              },
-            success: function(json){
-              if(json.result){
-                
-                var html = '';
-                 html += '<tr>';
-                 html += '<td>'+json.material.mat_nombre_material+'</td>';
-                 html += '<td>'+json.cantidad+'</td>';
-                 html += '<td hidden="true"> <input type="hidden" id="mat_id" name ="mat_id[]" value ="'+json.material.mat_id+'"></td>';
-                 html += '<td hidden ="true"> <input type="hidden" id="resta" name ="resta[]" value ="'+json.resta+'"></td>';
-                 html += '<td><button id="remove" name="remove" class="btn btn-danger pull-right" type="button" title ="Remover tratamientos"><i class="fa fa-times" aria-hidden="true"></i></button></td>';
-                 html += '</tr>';
-                $('#tbody-materiales').append(html);
-                $('#mse_cantidad').val('');
-                $('#material').val('');
-              }else{
-                $('#mse_cantidad').val('');
-                alert(json.msg);
-              }  
-            }
-        });
-
-   
-  }); 
-
-
-
-
- });
-
-$(document).on('submit', '#sesiones_create', function(){
-  
-  return confirm('Una vez ingresada la sesión´no puede modificarse, ¿está seguro de la Información entregada?');
-
-} );
-
-  $('#tratamiento_id').change(function(event){
-      
-      event.preventDefault();
-      
-      $.ajax({
-            url: '/biodent/public/sesiones-ejecucion-tratamientos/buscar_pieza',
-            type: 'post',
-            dataType: 'json',
-            data: {
-                    "_token": "{{ csrf_token() }}",
-                    "tra_id": $(this).val(),
-                    "pdt_id": {{ $id}}
-                    
-              },
-            success: function(json){
-              if(json.result){
-                $("#pieza_a_tratar").val(json.pieza_dental);
-                $("#pde_id").val(json.pde_id);
-              
-              }else{
-                alert(json.msg);
-              
-              } 
-            }
-        });
-    });  
-
- $(document).on('click', '#remove', function(){
-
-   $(this).parent().parent().remove();
-
-});
-
-
-
-
-
-</script>
 
 {!!Form::close()!!}
 

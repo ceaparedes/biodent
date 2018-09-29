@@ -288,6 +288,14 @@ public function create(){
     $paciente = Pacientes::findOrFail($id);
     //query para eliminar todos los elementos, en base al id entregado
     DB::table('antecedentes_medicos_generales')->where('pac_id', $id)->delete();
+    $pdt_id = PlanesDeTratamientos::where('pac_id',$id)->get();
+    foreach ($pdt_id as $plan) {
+      DB::table('sesiones_ejecucion_tratamientos')->where('pdt_id', $plan->pdt_id)->delete();
+      DB::table('plan_de_tratamiento_tratamiento')->where('pdt_id', $plan->pdt_id)->delete();
+    }
+    DB::table('abonos_tratamientos')->where('pac_id', $id)->delete();
+    DB::table('planes_de_tratamientos')->where('pac_id', $id)->delete();
+    
     $paciente->delete();
 
     return redirect()->route('pacientes.index')->with('destroyStatus', 'Paciente eliminado con exito!');

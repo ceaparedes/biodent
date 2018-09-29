@@ -30,7 +30,14 @@
 {!!Form::open(['route'=>['planes-de-tratamientos.show', $plan], 'method' =>'PUT', 'id'=>'tratamientos_update' ,'name'=>'tratamientos_update'])!!}
   <div class="box box-primary">
     <div class = "box-header">
-      <h2>Plan de Tratamiento: {{$paciente->pac_nombre_completo}}</h2>
+      <h2>Plan de Tratamiento: {{$paciente->pac_nombre_completo}} 
+        @if($plan->ept_id < 3)
+        <a class="btn btn-danger pull-right" href="{{route('planes-de-tratamientos.cancelar_plan', $plan->pdt_id)}}">Cancelar plan </a> 
+        <a class="btn btn-primary pull-right" href="{{route('planes-de-tratamientos.finalizar_plan', $plan->pdt_id)}}">Finalizar Plan</a>  
+
+        @endif
+        <a class="btn btn-success pull-right" href="{{route('planes-de-tratamientos.generar_pdf', $plan->pdt_id)}}">Generar Documento </a> 
+      </h2>
       <h3>Información del Paciente</h3>
     </div>
     <div class="box-body">
@@ -65,11 +72,19 @@
         <div id = 'tipos'>
         <div class="col-lg-4">
           {!! Form::Label('tipos', 'Tipos:') !!}
-          {!! Form::select('tan_id[]', $tipos_antecedentes, $antecedentes->tan_id, ['class' => 'form-control', 'placeholder'=> 'Seleccione Un Tipo', 'id ' => 'tan_id']) !!}
+           @if($antecedentes->tan_id == 1)
+                 {!! Form::text('tan_id[]', 'Enfermedades',  ['class' => 'form-control', 'id ' => 'tan_id', 'readonly '=>"readonly" ]) !!}
+              @elseif($antecedentes->tan_id == 2)
+                 {!! Form::text('tan_id[]', 'Alergias',  ['class' => 'form-control', 'id ' => 'tan_id', 'readonly '=>"readonly" ]) !!}
+              @elseif($antecedentes->tan_id == 3)
+                 {!! Form::text('tan_id[]', 'Medicamentos',  ['class' => 'form-control', 'id ' => 'tan_id', 'readonly '=>"readonly" ]) !!}
+              @elseif($antecedentes->tan_id == 4)
+                 {!! Form::text('tan_id[]', 'Otros',  ['class' => 'form-control', 'id ' => 'tan_id', 'readonly '=>"readonly" ]) !!}
+              @endif
         </div>
         <div class="col-lg-7">
           {!!Form::label('amg_descripcion', 'Descripcion:')!!}
-          {!!Form::text('amg_descripcion[]', $antecedentes->amg_descripcion, ['class'=>'form-control'])!!}
+          {!!Form::text('amg_descripcion[]', $antecedentes->amg_descripcion, ['class'=>'form-control', 'readonly' => true])!!}
         </div>
       @elseif(count($antecedentes)>1)
       <div id = 'tipos'>
@@ -155,6 +170,10 @@
     </div>
 
     @endif
+    <div class="col-lg-6">
+      {!! Form::Label('ept_id', 'Estado plan:') !!}
+      {!! Form::text('usu_id', $plan->estado->ept_estado, ['class' => 'form-control', 'readonly' => true]) !!}
+    </div>
   </div>
   <div class="box-footer">
      

@@ -77,6 +77,25 @@ route::post('planes-de-tratamientos/{pac_id}/store',[
 			'as' => 'planes-de-tratamientos.store'
 
 ]);
+
+route::get('planes-de-tratamientos/cancelar_plan/{pdt_id}',[
+			'uses'=> 'PlanesDeTratamientosController@cancelar_plan',
+			'as' => 'planes-de-tratamientos.cancelar_plan'
+
+]);
+
+route::get('planes-de-tratamientos/finalizar_plan/{pdt_id}',[
+			'uses'=> 'PlanesDeTratamientosController@finalizar_plan',
+			'as' => 'planes-de-tratamientos.finalizar_plan'
+
+]);
+
+route::get('planes-de-tratamientos/generar_pdf/{pdt_id}',[
+			'uses'=> 'PlanesDeTratamientosController@generar_pdf',
+			'as' => 'planes-de-tratamientos.generar_pdf'
+
+]);
+
 route::get('planes-de-tratamientos/{pac_id}/pacienteindex',[
 			'uses'=> 'PlanesDeTratamientosController@pacienteindex',
 			'as' => 'planes-de-tratamientos.pacienteindex'
@@ -158,7 +177,7 @@ route::get('abonos-tratamientos/{id}/destroy',[
 			'uses'=> 'AbonosTratamientosController@destroy',
 			'as' => 'abonos-tratamientos.destroy'
 ]);
-
+//end rutas abonos
 //rutas sesiones ejecucion Tratamiento
 
 route::get('sesiones-ejecucion-tratamientos/{pdt_id}/',[
@@ -179,8 +198,31 @@ route::post('sesiones-ejecucion-tratamientos/consultar_stock',[
 
 ]);
 
+route::post('sesiones-ejecucion-tratamientos/buscar_pieza',[
+			'uses'=> 'SesionesEjecucionTratamientosController@buscar_pieza',
+			'as' => 'sesiones-ejecucion-tratamientos.buscar_pieza'
+
+]);
+
 route::post('sesiones-ejecucion-tratamientos/{pdt_id}/store',[
 			'uses'=> 'SesionesEjecucionTratamientosController@store',
 			'as' => 'sesiones-ejecucion-tratamientos.store'
 
+]);
+
+route::get('sesiones-ejecucion-tratamientos/{pdt_id}/index',[
+			'uses'=> 'SesionesEjecucionTratamientosController@index',
+			'as' => 'sesiones-ejecucion-tratamientos.index'
+
+]);
+
+route::get('sesiones-ejecucion-tratamientos/{id}/destroy',[
+			'uses'=> 'SesionesEjecucionTratamientosController@destroy',
+			'as' => 'sesiones-ejecucion-tratamientos.destroy'
+
+]);
+
+route::get('sesiones-ejecucion-tratamientos/{id}/show',[
+			'uses'=> 'SesionesEjecucionTratamientosController@show',
+			'as' => 'sesiones-ejecucion-tratamientos.show'
 ]);

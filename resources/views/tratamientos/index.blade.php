@@ -26,7 +26,9 @@
 				<th>Nombre Tratamiento</th>
 				<th>Gasto de Laboratorio</th>
 				<th>Costo Total Tratamiento</th>
+				@if(Auth::user()->usu_rol == 'Administrador')
 				<th>Opciones</th>
+				@endif
 			</thead>
 			<tbody>
 				@foreach($tratamientos as $tratamiento)
@@ -35,10 +37,12 @@
 						<td>{{ $tratamiento->tra_nombre }}</td>
 						<td>{{ number_format($tratamiento->tra_costo_laboratorio) }}</td>
 						<td>{{ number_format($tratamiento->tra_costo) }}</td>
+						@if(Auth::user()->usu_rol == 'Administrador')
 						<td>
 							<a href=" {{route('tratamientos.edit',$tratamiento->tra_id)}} " class="btn btn-warning"><i class="glyphicon glyphicon-wrench"></i></a> 
 							<a href="{{route('tratamientos.destroy',$tratamiento->tra_id)}} " onclick= "return confirm('¿Esta seguro de Eliminar al tratamiento?') " class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
 						</td>
+						@endif
 					</tr>
 				@endforeach
 			</tbody>
